@@ -342,85 +342,85 @@ class SoundWaveEngine {
 // --- 3. The Official Members Dataset (9 Cores of YouPulse - Zero Emojis) ---
 const MEMBERS_DATA = [
   {
-    id: 'kadiri',
-    number: '01',
-    callsign: 'LEAD',
-    name: 'Mohamed Kadiri',
-    role: 'Président du BDE',
-    photo: 'assets/images/kadiri.jpg',
-    tagline: 'Transformer chaque ligne de code en opportunité réelle et faire vibrer le campus de YouCode.'
-  },
-  {
-    id: 'fatima',
-    number: '02',
-    callsign: 'FLUX',
-    name: 'Fatima',
-    role: 'Vice-Présidente',
-    photo: 'assets/images/fatima.jpg',
-    tagline: 'Le trait d’union entre les étudiants, l’écoute active et la dynamique collective de YouPulse.'
-  },
-  {
-    id: 'anas',
-    number: '03',
-    callsign: 'CIPHER',
-    name: 'Anas Ali',
-    role: 'Responsable Tech & Hackathons',
-    photo: 'assets/images/anas.jpg',
-    tagline: '0% de latence, 100% de code. Prêt à propulser YouCode dans les plus grands hackathons nationaux.'
-  },
-  {
-    id: 'hiba',
-    number: '04',
-    callsign: 'ECHO',
-    name: 'Hiba',
-    role: 'Responsable Communication & Relations',
-    photo: 'assets/images/hiba.jpg',
-    tagline: 'Donner une voix forte à chaque promo et faire rayonner nos projets sur tout le réseau.'
+    id: 'adam',
+    number: '07',
+    callsign: 'NEXUS',
+    name: 'Adam Aarboubaa',
+    role: 'Président',
+    photo: 'assets/images/adam.png',
+    tagline: 'Insuffler une vision ambitieuse, fédérer les talents de YouCode et transformer nos idées en impact réel.'
   },
   {
     id: 'otmane',
     number: '05',
     callsign: 'PRISM',
     name: 'Otman Mellouki',
-    role: 'Directeur Artistique & Design',
+    role: 'Secrétaire Général',
     photo: 'assets/images/otmane.png',
-    tagline: 'Une identité visuelle futuriste et un branding percutant pour chaque événement du campus.'
+    tagline: 'Assurer la rigueur administrative, fluidifier la coordination interne et structurer chaque action du BDE.'
   },
   {
     id: 'oumaima',
     number: '06',
     callsign: 'PULSE',
-    name: 'Oumaima',
-    role: 'Responsable Événements & Intégration',
+    name: 'Oumaima Boushama',
+    role: 'Vice-Présidente',
     photo: 'assets/images/oumaima.jpg',
-    tagline: 'Créer des moments inoubliables et souder l’esprit de famille entre toutes les promotions.'
+    tagline: 'Co-piloter la vision YouPulse, être à l’écoute de chaque promo et garantir la cohésion de l’équipe.'
   },
   {
-    id: 'adam',
-    number: '07',
-    callsign: 'NEXUS',
-    name: 'Adam Aarboubaa',
-    role: 'Responsable Partenariats & Entreprises',
-    photo: 'assets/images/adam.png',
-    tagline: 'Bâtir des ponts solides avec l’écosystème tech et ouvrir les portes de stages et opportunités.'
+    id: 'kadiri-mohammed',
+    number: '01',
+    callsign: 'LEAD',
+    name: 'Mohammed Kadiri',
+    role: 'Responsable Communication',
+    photo: 'assets/images/kadiri.jpg',
+    tagline: 'Porter la voix de YouPulse, connecter les étudiants et faire résonner chaque initiative sur tout le campus.'
+  },
+  {
+    id: 'fatima',
+    number: '02',
+    callsign: 'FLUX',
+    name: 'Fatima Id Ali',
+    role: 'Responsable Clubs',
+    photo: 'assets/images/fatima.jpg',
+    tagline: 'Fédérer les passions, accompagner chaque club étudiant et créer une communauté active et innovante.'
+  },
+  {
+    id: 'anas',
+    number: '03',
+    callsign: 'CIPHER',
+    name: 'Anas Boutbagha',
+    role: 'Responsable Événements',
+    photo: 'assets/images/anas.jpg',
+    tagline: 'Concevoir des hackathons intenses, des compétitions stimulantes et des temps forts inoubliables.'
+  },
+  {
+    id: 'hiba',
+    number: '04',
+    callsign: 'ECHO',
+    name: 'Hiba Zakif',
+    role: 'Responsable Média',
+    photo: 'assets/images/hiba.jpg',
+    tagline: 'Capturer l’énergie du campus, produire des visuels percutants et valoriser les réussites de YouCode.'
   },
   {
     id: 'achraf',
     number: '08',
     callsign: 'BLAZE',
-    name: 'Achraf',
-    role: 'Responsable Clubs & Compétitions',
+    name: 'Achraf Abdelhakim Es-saloua',
+    role: 'Responsable Événements',
     photo: 'assets/images/achraf.jpg',
-    tagline: 'Encadrer les initiatives étudiantes, stimuler la compétition saine et élever le niveau technique.'
+    tagline: 'Dynamiser la vie étudiante par des challenges stimulants, une régie réactive et une ambiance unique.'
   },
   {
     id: 'redouane',
     number: '09',
     callsign: 'VOLT',
-    name: 'Redouane',
-    role: 'Responsable Logistique & Coordination',
+    name: 'Ridouane El Habib',
+    role: 'Trésorier',
     photo: 'assets/images/redouane.jpg',
-    tagline: 'Organisation millimétrée, régie réactive et soutien inconditionnel à chaque instant sur le campus.'
+    tagline: 'Gestion financière rigoureuse, transparence totale et optimisation des budgets pour financer nos ambitions.'
   }
 ];
 
