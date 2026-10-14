@@ -1,12 +1,379 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouPulse // BDE YouCode Youssoufia</title>
+  
+  <meta name="description" content="YouPulse - Bureau des Étudiants (BDE) de YouCode Youssoufia. 6 membres, 1 seul pouls : découvrez nos piliers et l'énergie du campus." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%230066ff%22/><path d=%22M20 50h18l7-20 10 40 7-20h18%22 stroke=%22%23fff%22 stroke-width=%228%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
+
+  <!-- Google Fonts: Syne, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Welcome to You Pulse</h1>
-    <h2>Loading ...</h2>
+
+  <!-- Background Sound Waves Canvas (Dense, high-energy, audio-reactive) -->
+  <div class="audio-canvas-container" aria-hidden="true">
+    <canvas id="soundwave-canvas"></canvas>
+  </div>
+  <div class="audio-grid-overlay" aria-hidden="true"></div>
+  <div class="ambient-vignette" aria-hidden="true"></div>
+
+  <!-- App Wrapper -->
+  <div class="app-wrapper">
+
+    <!-- Header Navigation -->
+    <header class="site-header">
+      <div class="header-container">
+        
+        <!-- Official YouPulse Logo from YouCode Youssoufia -->
+        <a href="#accueil" class="header-brand" aria-label="YouPulse BDE Accueil">
+          <img src="assets/images/logo_dark.png" alt="YouPulse BDE YouCode Youssoufia" class="header-logo-img" />
+          <div class="eq-bars-wrapper" aria-hidden="true" title="Audio Spectrum Active">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </div>
+        </a>
+
+        <!-- Nav Links -->
+        <nav class="header-nav">
+          <a href="#piliers" class="nav-link">Les Piliers</a>
+          <a href="#equipe" class="nav-link">L'Équipe (6 Cores)</a>
+        </nav>
+
+        <!-- Secret Program Teaser Button in Header (No emojis) -->
+        <button id="header-secret-cta" class="header-cta-secret" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span>PROGRAMME SECRET</span>
+        </button>
+
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+      <!-- Hero Section -->
+      <section id="accueil" class="hero-wrap">
+        
+        <!-- Campus Badge with Live Equalizer -->
+        <div class="hero-campus-pill">
+          <div class="eq-bars-wrapper" style="height: 12px; margin-right: 4px;" aria-hidden="true">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </div>
+          <span>BDE YOUCODE YOUSSOUFIA // MANDAT 2026-2027</span>
+        </div>
+
+        <!-- Big Official Logo Display with Blue Ambient Glow -->
+        <div class="hero-main-logo-box">
+          <img src="assets/images/logo_dark.png" alt="YouPulse Logo" class="hero-main-logo" />
+        </div>
+
+        <!-- Hero Punchline -->
+        <h1 class="hero-punchline">
+          LE BATTEMENT DE COEUR <br />
+          <span class="gradient-blue">DU CAMPUS YOUCODE.</span>
+        </h1>
+
+        <!-- Engaging Subtext -->
+        <p class="hero-subtext">
+          Une équipe de <strong>6 membres</strong> survoltés pour réinventer la vie étudiante à YouCode Youssoufia. Moins de blabla, plus d’énergie : des hackathons sous haute tension, des tournois gaming déjantés et un campus qui pulse à 100%.
+        </p>
+
+        <!-- CTA Buttons (No emojis) -->
+        <div class="hero-buttons">
+          
+          <!-- The Secret Hamster Button -->
+          <button id="btn-secret-program" class="btn-secret-teaser" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>DÉCOUVRIR LE PROGRAMME</span>
+            <span class="badge-embargo">EMBARGO NHAR TNIN</span>
+          </button>
+
+          <!-- Scroll to Pillars -->
+          <a href="#piliers" class="btn-secondary-link">
+            <span>DÉCOUVRIR NOS ENGAGEMENTS</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          </a>
+
+        </div>
+
+        <!-- Interactive Audio Wave Hint -->
+        <div class="sound-wave-hint">
+          <div class="eq-bars-wrapper" style="height: 14px;" aria-hidden="true">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </div>
+          <span>Bougez votre souris ou cliquez pour faire vibrer les ondes audio &amp; les sonars</span>
+        </div>
+
+      </section>
+
+      <!-- Les 4 Piliers -->
+      <section id="piliers" class="pillars-section">
+        
+        <div class="section-head">
+          <span class="section-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
+            PLAN D'ACTION 2026-2027
+          </span>
+          <h2 class="section-heading">CE QUE YOUPULSE VA <span>CHANGER</span></h2>
+          <p class="section-sub">
+            Quatre piliers concrets pour transformer le quotidien des apprenants de YouCode Youssoufia.
+          </p>
+        </div>
+
+        <!-- Central Line Tree with Branches ("Line flwesst o kharjin mnhom foro3") -->
+        <div class="pillars-spine-tree">
+          
+          <!-- Central Glowing Vertical Line with Traveling Photon -->
+          <div class="spine-central-line" aria-hidden="true">
+            <div class="spine-traveling-spark"></div>
+          </div>
+
+          <!-- Branch 01 (Left) -->
+          <div class="spine-branch-row row-left">
+            <div class="pillar-card">
+              <div class="pillar-top">
+                <div class="pillar-icon-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                </div>
+                <span class="pillar-number">PILIER 01</span>
+              </div>
+              <h3 class="pillar-title">Vie de Campus &amp; Décompression</h3>
+              <p class="pillar-desc">
+                Le code intensif demande du souffle. Nous transformons le foyer étudiant en un véritable havre de convivialité pour décompresser après les Piscines et les projets complexes.
+              </p>
+              <ul class="pillar-features-list">
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Réaménagement du lounge (pouf géants, setup sono &amp; détente)
+                </li>
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Station café &amp; thé marocain gratuite lors des nuits de rush
+                </li>
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Sessions acoustiques &amp; soirées de décompression chaque fin de sprint
+                </li>
+              </ul>
+            </div>
+
+            <div class="spine-node-column">
+              <span class="branch-trace-left" aria-hidden="true"></span>
+              <div class="spine-center-node">
+                <span class="node-pulse-ring"></span>
+                <span class="node-index">01</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Branch 02 (Right) -->
+          <div class="spine-branch-row row-right">
+            <div class="spine-node-column">
+              <div class="spine-center-node">
+                <span class="node-pulse-ring"></span>
+                <span class="node-index">02</span>
+              </div>
+              <span class="branch-trace-right" aria-hidden="true"></span>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-top">
+                <div class="pillar-icon-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <span class="pillar-number">PILIER 02</span>
+              </div>
+              <h3 class="pillar-title">Hackathons 48H &amp; Bounties Tech</h3>
+              <p class="pillar-desc">
+                Connecter YouCode aux meilleures entreprises de la tech. Des hackathons avec de vrais sponsors, des prix réels et une émulation collective pour booster vos portfolios.
+              </p>
+              <ul class="pillar-features-list">
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  2 Grands Hackathons annuels avec cash prizes et stages à la clé
+                </li>
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Challenges algo &amp; bots hebdomadaires sur Discord
+                </li>
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Mentorat pair-à-pair entre apprenants de 2ème et 1ère année
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Branch 03 (Left) -->
+          <div class="spine-branch-row row-left">
+            <div class="pillar-card">
+              <div class="pillar-top">
+                <div class="pillar-icon-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4m10-2h.01m-3 0h.01"></path></svg>
+                </div>
+                <span class="pillar-number">PILIER 03</span>
+              </div>
+              <h3 class="pillar-title">Gaming Arena &amp; Tournois Esports</h3>
+              <p class="pillar-desc">
+                Parce qu'un bon développeur sait aussi clutch en fin de manche. Nous structurons des tournois réguliers avec diffusion live sur grand écran et cast enflammé.
+              </p>
+              <ul class="pillar-features-list">
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Ligue Valorant, CS2 &amp; Rocket League sur réseau local basse latence
+                </li>
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Tournois FIFA &amp; jeux de combat le vendredi après-midi
+                </li>
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Streaming Twitch des finales avec commentateurs étudiants
+                </li>
+              </ul>
+            </div>
+
+            <div class="spine-node-column">
+              <span class="branch-trace-left" aria-hidden="true"></span>
+              <div class="spine-center-node">
+                <span class="node-pulse-ring"></span>
+                <span class="node-index">03</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Branch 04 (Right) -->
+          <div class="spine-branch-row row-right">
+            <div class="spine-node-column">
+              <div class="spine-center-node">
+                <span class="node-pulse-ring"></span>
+                <span class="node-index">04</span>
+              </div>
+              <span class="branch-trace-right" aria-hidden="true"></span>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-top">
+                <div class="pillar-icon-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <span class="pillar-number">PILIER 04</span>
+              </div>
+              <h3 class="pillar-title">Transparence &amp; Voix Étudiante</h3>
+              <p class="pillar-desc">
+                Le BDE appartient à tous les étudiants. Pas de décisions à huis clos : communication claire de chaque budget et porte-voix direct auprès de l’équipe pédagogique.
+              </p>
+              <ul class="pillar-features-list">
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Canal direct de feedback anonyme pour résoudre les problèmes du quotidien
+                </li>
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Publication transparente des comptes et budgets de chaque événement
+                </li>
+                <li class="pillar-feature-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Aide logistique et financière pour tous les clubs étudiants du campus
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Les Cartes de Membres (The 6 Cores) -->
+      <section id="equipe" class="members-section">
+        
+        <div class="section-head">
+          <span class="section-tag">LES 6 CORES DU BUREAU</span>
+          <h2 class="section-heading">L'ÉQUIPE <span>YOUPULSE</span></h2>
+          <p class="section-sub">
+            Six personnalités complémentaires, engagées pour donner le meilleur rythme à votre année.
+          </p>
+        </div>
+
+        <!-- 6 Cybernetic Member Cards Grid (Rendered dynamically by main.js) -->
+        <div id="members-grid" class="members-grid">
+          <!-- Populated by JavaScript with new cybernetic card design -->
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- The Bouncing Hamster & Time-Only Modal (No text, No emojis) -->
+    <div id="hamster-modal" class="hamster-modal-overlay" role="dialog" aria-modal="true" aria-label="Programme Secret YouPulse">
+      <div class="hamster-modal-window">
+        
+        <button id="modal-close-icon" class="modal-close-icon" type="button" aria-label="Fermer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+
+        <!-- Bouncing / Pumping Hamster Avatar ("kat bonba") -->
+        <div class="hamster-pump-wrapper">
+          <div class="hamster-pump-ring"></div>
+          <div class="hamster-pump-ring"></div>
+          <div id="bouncing-hamster-pic" class="hamster-bouncing-avatar" title="Cliquez sur le hamster">
+            <img src="assets/images/hamster_shhh.jpg" alt="Hamster Silence" />
+          </div>
+        </div>
+
+        <!-- Time Only Section (Countdown to Monday) -->
+        <div class="time-only-container">
+          <div class="time-embargo-label">OUVERTURE OFFICIELLE DANS (NHAR TNIN)</div>
+          <div class="countdown-digits-grid">
+            <div class="digit-box">
+              <span class="digit-num" id="count-days">00</span>
+              <span class="digit-lbl">Jours</span>
+            </div>
+            <div class="digit-box">
+              <span class="digit-num" id="count-hours">00</span>
+              <span class="digit-lbl">Heures</span>
+            </div>
+            <div class="digit-box">
+              <span class="digit-num" id="count-mins">00</span>
+              <span class="digit-lbl">Minutes</span>
+            </div>
+            <div class="digit-box">
+              <span class="digit-num" id="count-secs">00</span>
+              <span class="digit-lbl">Secondes</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <img src="assets/images/logo_dark.png" alt="YouPulse BDE YouCode Youssoufia" class="footer-logo" />
+        <p class="footer-credits">
+          © 2026 YouPulse • Bureau des Étudiants de YouCode Youssoufia.
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
