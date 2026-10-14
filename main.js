@@ -58,7 +58,7 @@ class SoundSynth {
 
       noiseSource.start(now);
       noiseSource.stop(now + duration);
-    } catch (e) {}
+    } catch (e) {  }
   }
 
   // Cute squeak when clicking directly on the bouncing hamster
@@ -82,7 +82,7 @@ class SoundSynth {
       gain.connect(this.ctx.destination);
       osc.start(now);
       osc.stop(now + 0.16);
-    } catch (e) {}
+    } catch (e)  { }
   }
 
   // Tactile futuristic micro-blip
@@ -105,7 +105,7 @@ class SoundSynth {
       gain.connect(this.ctx.destination);
       osc.start(now);
       osc.stop(now + 0.035);
-    } catch (e) {}
+    } catch (e)  { }
   }
 }
 
@@ -304,8 +304,8 @@ class SoundWaveEngine {
     this.ctx.save();
     this.ctx.beginPath();
 
-    this.ctx.strokeStyle = index % 2 === 0 
-      ? `rgba(0, 210, 255, ${alpha})` 
+    this.ctx.strokeStyle = index % 2 === 0
+      ? `rgba(0, 210, 255, ${alpha})`
       : `rgba(0, 102, 255, ${alpha * 1.2})`;
     this.ctx.lineWidth = index % 3 === 0 ? 2.5 : 1.5;
 
@@ -339,61 +339,88 @@ class SoundWaveEngine {
   }
 }
 
-// --- 3. The 6 Members Dataset (Zero Emojis) ---
+// --- 3. The Official Members Dataset (9 Cores of YouPulse - Zero Emojis) ---
 const MEMBERS_DATA = [
   {
-    id: 'yassine',
+    id: 'kadiri',
     number: '01',
-    callsign: 'APEX',
-    name: 'Yassine El Mansouri',
+    callsign: 'LEAD',
+    name: 'Mohamed Kadiri',
     role: 'Président du BDE',
-    photo: 'assets/images/yassine.jpg',
-    tagline: 'Transformer chaque ligne de code en opportunité réelle et chaque projet en souvenir inoubliable.'
+    photo: 'assets/images/kadiri.jpg',
+    tagline: 'Transformer chaque ligne de code en opportunité réelle et faire vibrer le campus de YouCode.'
   },
   {
-    id: 'salma',
+    id: 'fatima',
     number: '02',
     callsign: 'FLUX',
-    name: 'Salma Bennani',
+    name: 'Fatima',
     role: 'Vice-Présidente',
-    photo: 'assets/images/salma.jpg',
-    tagline: 'Le trait d’union entre les développeurs, l’écoute bienveillante et l’énergie collective du campus.'
+    photo: 'assets/images/fatima.jpg',
+    tagline: 'Le trait d’union entre les étudiants, l’écoute active et la dynamique collective de YouPulse.'
   },
   {
-    id: 'amine',
+    id: 'anas',
     number: '03',
     callsign: 'CIPHER',
-    name: 'Amine Tazi',
+    name: 'Anas Ali',
     role: 'Responsable Tech & Hackathons',
-    photo: 'assets/images/amine.jpg',
-    tagline: '0% de latence, 100% de code. Prêt pour des nuits blanches de hackathons et d’arènes LAN.'
+    photo: 'assets/images/anas.jpg',
+    tagline: '0% de latence, 100% de code. Prêt à propulser YouCode dans les plus grands hackathons nationaux.'
   },
   {
-    id: 'nour',
+    id: 'hiba',
     number: '04',
-    callsign: 'PRISM',
-    name: 'Nour Cherkaoui',
-    role: 'Directrice Artistique & Design',
-    photo: 'assets/images/nour.jpg',
-    tagline: 'Donner à YouCode une identité visuelle futuriste qui claque sur les réseaux et sur le campus.'
-  },
-  {
-    id: 'mehdi',
-    number: '05',
-    callsign: 'VOLT',
-    name: 'Mehdi Daoudi',
-    role: 'Responsable Logistique & Événements',
-    photo: 'assets/images/mehdi.jpg',
-    tagline: 'Si le son ne fait pas vibrer les murs et que la régie traîne, ce n’est pas YouPulse.'
-  },
-  {
-    id: 'rania',
-    number: '06',
     callsign: 'ECHO',
-    name: 'Rania Alami',
-    role: 'Responsable Communication & Relations Étudiants',
-    photo: 'assets/images/rania.jpg',
-    tagline: 'Donner une voix à chaque promo, raconter nos réussites et faire rayonner YouPulse.'
+    name: 'Hiba',
+    role: 'Responsable Communication & Relations',
+    photo: 'assets/images/hiba.jpg',
+    tagline: 'Donner une voix forte à chaque promo et faire rayonner nos projets sur tout le réseau.'
+  },
+  {
+    id: 'otmane',
+    number: '05',
+    callsign: 'PRISM',
+    name: 'Otman Mellouki',
+    role: 'Directeur Artistique & Design',
+    photo: 'assets/images/otmane.png',
+    tagline: 'Une identité visuelle futuriste et un branding percutant pour chaque événement du campus.'
+  },
+  {
+    id: 'oumaima',
+    number: '06',
+    callsign: 'PULSE',
+    name: 'Oumaima',
+    role: 'Responsable Événements & Intégration',
+    photo: 'assets/images/oumaima.jpg',
+    tagline: 'Créer des moments inoubliables et souder l’esprit de famille entre toutes les promotions.'
+  },
+  {
+    id: 'adam',
+    number: '07',
+    callsign: 'NEXUS',
+    name: 'Adam Aarboubaa',
+    role: 'Responsable Partenariats & Entreprises',
+    photo: 'assets/images/adam.png',
+    tagline: 'Bâtir des ponts solides avec l’écosystème tech et ouvrir les portes de stages et opportunités.'
+  },
+  {
+    id: 'achraf',
+    number: '08',
+    callsign: 'BLAZE',
+    name: 'Achraf',
+    role: 'Responsable Clubs & Compétitions',
+    photo: 'assets/images/achraf.jpg',
+    tagline: 'Encadrer les initiatives étudiantes, stimuler la compétition saine et élever le niveau technique.'
+  },
+  {
+    id: 'redouane',
+    number: '09',
+    callsign: 'VOLT',
+    name: 'Redouane',
+    role: 'Responsable Logistique & Coordination',
+    photo: 'assets/images/redouane.jpg',
+    tagline: 'Organisation millimétrée, régie réactive et soutien inconditionnel à chaque instant sur le campus.'
   }
 ];
 
@@ -527,7 +554,24 @@ function updateCountdown() {
   if (secsEl) secsEl.textContent = String(seconds).padStart(2, '0');
 }
 
-// --- 7. Bouncing Hamster Modal Logic ---
+// --- 7. Modal Handlers (Welcome Teaser & Bouncing Hamster) ---
+function openWelcomeModal() {
+  const modal = document.getElementById('welcome-teaser-modal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    sound.playHoverBlip(520);
+  }
+}
+
+function closeWelcomeModal() {
+  const modal = document.getElementById('welcome-teaser-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
 function openHamsterModal() {
   const modal = document.getElementById('hamster-modal');
   if (modal) {
@@ -557,7 +601,56 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // D. Bind Hamster secret modal triggers
+  // D. Welcome Teaser Modal Elements
+  const welcomeOverlay = document.getElementById('welcome-teaser-modal');
+  const btnWelcomeView = document.getElementById('btn-welcome-view');
+  const btnWelcomeSkip = document.getElementById('btn-welcome-skip');
+  const btnWelcomeClose = document.getElementById('welcome-close-btn');
+
+  // When user clicks "VOIR LE PROGRAMME" in the first-visit popup:
+  // Transition directly into the bouncing hamster surprise!
+  if (btnWelcomeView) {
+    btnWelcomeView.addEventListener('click', () => {
+      closeWelcomeModal();
+      sessionStorage.setItem('youpulse_welcome_seen', 'true');
+      setTimeout(() => {
+        openHamsterModal();
+        waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight / 2, 55);
+      }, 180);
+    });
+  }
+
+  if (btnWelcomeSkip) {
+    btnWelcomeSkip.addEventListener('click', () => {
+      closeWelcomeModal();
+      sessionStorage.setItem('youpulse_welcome_seen', 'true');
+    });
+  }
+
+  if (btnWelcomeClose) {
+    btnWelcomeClose.addEventListener('click', () => {
+      closeWelcomeModal();
+      sessionStorage.setItem('youpulse_welcome_seen', 'true');
+    });
+  }
+
+  if (welcomeOverlay) {
+    welcomeOverlay.addEventListener('click', (e) => {
+      if (e.target === welcomeOverlay) {
+        closeWelcomeModal();
+        sessionStorage.setItem('youpulse_welcome_seen', 'true');
+      }
+    });
+  }
+
+  // Auto trigger the welcome "Voir Programme" popup on first visit after 900ms
+  if (!sessionStorage.getItem('youpulse_welcome_seen')) {
+    setTimeout(() => {
+      openWelcomeModal();
+    }, 900);
+  }
+
+  // E. Bind Hamster secret modal triggers
   const btnSecretHero = document.getElementById('btn-secret-program');
   const btnSecretHeader = document.getElementById('header-secret-cta');
   const iconCloseHamster = document.getElementById('modal-close-icon');
@@ -594,9 +687,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ESC key closes modal
+  // ESC key closes any open modal
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      closeWelcomeModal();
       closeHamsterModal();
     }
   });

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YouPulse // BDE YouCode Youssoufia</title>
+  <title>YouPulse // The BDE of YouCode - Events & Activities Plan</title>
   
-  <meta name="description" content="YouPulse - Bureau des Étudiants (BDE) de YouCode Youssoufia. 6 membres, 1 seul pouls : découvrez nos piliers et l'énergie du campus." />
+  <meta name="description" content="YouPulse - The BDE of YouCode. Events & Activities Plan. Connect. Compete. Come Alive." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%230066ff%22/><path d=%22M20 50h18l7-20 10 40 7-20h18%22 stroke=%22%23fff%22 stroke-width=%228%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
 
   <!-- Google Fonts: Syne, Plus Jakarta Sans, JetBrains Mono -->
@@ -17,7 +17,7 @@
 </head>
 <body>
 
-  <!-- Background Sound Waves Canvas (Dense, high-energy, audio-reactive) -->
+  <!-- Background Sound Waves Canvas (Audio-reactive) -->
   <div class="audio-canvas-container" aria-hidden="true">
     <canvas id="soundwave-canvas"></canvas>
   </div>
@@ -31,9 +31,9 @@
     <header class="site-header">
       <div class="header-container">
         
-        <!-- Official YouPulse Logo from YouCode Youssoufia -->
-        <a href="#accueil" class="header-brand" aria-label="YouPulse BDE Accueil">
-          <img src="assets/images/logo_dark.png" alt="YouPulse BDE YouCode Youssoufia" class="header-logo-img" />
+        <!-- Official YouPulse Logo -->
+        <a href="#welcome" class="header-brand" aria-label="YouPulse Home">
+          <img src="assets/images/logo_dark.png" alt="YouPulse BDE YouCode" class="header-logo-img" />
           <div class="eq-bars-wrapper" aria-hidden="true" title="Audio Spectrum Active">
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
@@ -45,14 +45,15 @@
 
         <!-- Nav Links -->
         <nav class="header-nav">
-          <a href="#piliers" class="nav-link">Les Piliers</a>
-          <a href="#equipe" class="nav-link">L'Équipe (6 Cores)</a>
+          <a href="#pillars" class="nav-link">Pillars</a>
+          <a href="#clubs" class="nav-link">Clubs</a>
+          <a href="#team" class="nav-link">Team</a>
         </nav>
 
         <!-- Secret Program Teaser Button in Header (No emojis) -->
         <button id="header-secret-cta" class="header-cta-secret" type="button">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <span>PROGRAMME SECRET</span>
+          <span>SECRET PROGRAMME</span>
         </button>
 
       </div>
@@ -61,8 +62,8 @@
     <!-- Main Content -->
     <main>
 
-      <!-- Hero Section -->
-      <section id="accueil" class="hero-wrap">
+      <!-- Hero Section (Slide 1: Events & Activities Plan) -->
+      <section id="welcome" class="hero-wrap">
         
         <!-- Campus Badge with Live Equalizer -->
         <div class="hero-campus-pill">
@@ -71,67 +72,88 @@
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
           </div>
-          <span>BDE YOUCODE YOUSSOUFIA // MANDAT 2026-2027</span>
+          <span>YOUPULSE · THE BDE OF YOUCODE</span>
         </div>
 
-        <!-- Big Official Logo Display with Blue Ambient Glow -->
+        <!-- Big Official Logo Display with Ambient Glow -->
         <div class="hero-main-logo-box">
           <img src="assets/images/logo_dark.png" alt="YouPulse Logo" class="hero-main-logo" />
         </div>
 
-        <!-- Hero Punchline -->
+        <!-- Official Tagline -->
+        <div class="hero-tagline-motto">CONNECT. COMPETE. COME ALIVE.</div>
+
+        <!-- Hero Headline -->
         <h1 class="hero-punchline">
-          LE BATTEMENT DE COEUR <br />
-          <span class="gradient-blue">DU CAMPUS YOUCODE.</span>
+          EVENTS & ACTIVITIES <br />
+          <span class="gradient-blue">PLAN 2026 - 2027</span>
         </h1>
 
-        <!-- Engaging Subtext -->
+        <!-- Engaging Subtext from Slide 1 -->
         <p class="hero-subtext">
-          Une équipe de <strong>6 membres</strong> survoltés pour réinventer la vie étudiante à YouCode Youssoufia. Moins de blabla, plus d’énergie : des hackathons sous haute tension, des tournois gaming déjantés et un campus qui pulse à 100%.
+          Annual programme for students and professional partners. The Pulse of YouCode: uniting peer-learning, national hackathons, esports arenas, and student wellbeing.
         </p>
 
-        <!-- CTA Buttons (No emojis) -->
+        <!-- High-Precision Cybernetic Hero CTA Buttons (Custom Designed, Non-Generic) -->
         <div class="hero-buttons">
           
-          <!-- The Secret Hamster Button -->
-          <button id="btn-secret-program" class="btn-secret-teaser" type="button">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            <span>DÉCOUVRIR LE PROGRAMME</span>
-            <span class="badge-embargo">EMBARGO NHAR TNIN</span>
+          <!-- Primary: Laser-Border Glassmorphic Secret Program Button -->
+          <button id="btn-secret-program" class="btn-laser-primary" type="button" aria-label="Découvrir le programme YouPulse">
+            <span class="btn-laser-glow" aria-hidden="true"></span>
+            <span class="btn-laser-content">
+              <span class="btn-icon-lock-pulse">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </span>
+              <span class="btn-label-text">DÉCOUVRIR LE PROGRAMME</span>
+              <span class="btn-status-pill">
+                <span class="status-live-dot"></span>
+                <span>NHAR TNIN</span>
+              </span>
+            </span>
           </button>
 
-          <!-- Scroll to Pillars -->
-          <a href="#piliers" class="btn-secondary-link">
-            <span>DÉCOUVRIR NOS ENGAGEMENTS</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          <!-- Secondary: Frosted Carbon High-Precision Link with Directional Beacon -->
+          <a href="#pillars" class="btn-frosted-secondary">
+            <span class="btn-secondary-label">FOUR ENGAGEMENT PILLARS</span>
+            <span class="btn-secondary-arrow" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </span>
           </a>
 
         </div>
 
-        <!-- Interactive Audio Wave Hint -->
+        <!-- Futuristic Audio Wave Status HUD -->
         <div class="sound-wave-hint">
-          <div class="eq-bars-wrapper" style="height: 14px;" aria-hidden="true">
+          <div class="eq-bars-wrapper" style="height: 13px;" aria-hidden="true">
+            <span class="eq-bar"></span>
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
           </div>
-          <span>Bougez votre souris ou cliquez pour faire vibrer les ondes audio &amp; les sonars</span>
+          <span class="hud-hint-code">AUDIO-SYNTH ACTIVE //</span>
+          <span class="hud-hint-desc">Bougez la souris ou cliquez pour moduler les ondes</span>
         </div>
 
       </section>
 
-      <!-- Les 4 Piliers -->
-      <section id="piliers" class="pillars-section">
+      <!-- Four Engagement Pillars (Slide 2: Central Line with Branches - "Line flwesst o kharjin mnhom foro3") -->
+      <section id="pillars" class="pillars-section">
         
         <div class="section-head">
           <span class="section-tag">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
-            PLAN D'ACTION 2026-2027
+            STRATEGIC OVERVIEW
           </span>
-          <h2 class="section-heading">CE QUE YOUPULSE VA <span>CHANGER</span></h2>
+          <h2 class="section-heading">FOUR ENGAGEMENT <span>PILLARS</span></h2>
           <p class="section-sub">
-            Quatre piliers concrets pour transformer le quotidien des apprenants de YouCode Youssoufia.
+            Why YouPulse Wanted to Be the BDE. The core foundation driving every event, competition, and student experience.
           </p>
         </div>
 
@@ -143,33 +165,23 @@
             <div class="spine-traveling-spark"></div>
           </div>
 
-          <!-- Branch 01 (Left) -->
+          <!-- Branch 01 (Left: Integration) -->
           <div class="spine-branch-row row-left">
             <div class="pillar-card">
               <div class="pillar-top">
                 <div class="pillar-icon-box">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 </div>
-                <span class="pillar-number">PILIER 01</span>
+                <span class="pillar-number">PILLAR 01</span>
               </div>
-              <h3 class="pillar-title">Vie de Campus &amp; Décompression</h3>
-              <p class="pillar-desc">
-                Le code intensif demande du souffle. Nous transformons le foyer étudiant en un véritable havre de convivialité pour décompresser après les Piscines et les projets complexes.
-              </p>
-              <ul class="pillar-features-list">
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Réaménagement du lounge (pouf géants, setup sono &amp; détente)
-                </li>
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Station café &amp; thé marocain gratuite lors des nuits de rush
-                </li>
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Sessions acoustiques &amp; soirées de décompression chaque fin de sprint
-                </li>
-              </ul>
+              <h3 class="pillar-title">Integration</h3>
+              <div class="pillar-tagline">Shared campus experiences.</div>
+              <div class="pillar-why-box">
+                <div class="pillar-why-label">OUR WHY</div>
+                <p class="pillar-why-text">
+                  YouPulse puts YouCode on the map, giving it the visibility and standing of any major school on a global scale.
+                </p>
+              </div>
             </div>
 
             <div class="spine-node-column">
@@ -181,7 +193,7 @@
             </div>
           </div>
 
-          <!-- Branch 02 (Right) -->
+          <!-- Branch 02 (Right: Competitions) -->
           <div class="spine-branch-row row-right">
             <div class="spine-node-column">
               <div class="spine-center-node">
@@ -196,56 +208,36 @@
                 <div class="pillar-icon-box">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                 </div>
-                <span class="pillar-number">PILIER 02</span>
+                <span class="pillar-number">PILLAR 02</span>
               </div>
-              <h3 class="pillar-title">Hackathons 48H &amp; Bounties Tech</h3>
-              <p class="pillar-desc">
-                Connecter YouCode aux meilleures entreprises de la tech. Des hackathons avec de vrais sponsors, des prix réels et une émulation collective pour booster vos portfolios.
-              </p>
-              <ul class="pillar-features-list">
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  2 Grands Hackathons annuels avec cash prizes et stages à la clé
-                </li>
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Challenges algo &amp; bots hebdomadaires sur Discord
-                </li>
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Mentorat pair-à-pair entre apprenants de 2ème et 1ère année
-                </li>
-              </ul>
+              <h3 class="pillar-title">Competitions</h3>
+              <div class="pillar-tagline">Intense technical hackathons.</div>
+              <div class="pillar-why-box">
+                <div class="pillar-why-label">OUR WHY</div>
+                <p class="pillar-why-text">
+                  YouPulse raises the bar, preparing every participant for tougher and newer challenges.
+                </p>
+              </div>
             </div>
           </div>
 
-          <!-- Branch 03 (Left) -->
+          <!-- Branch 03 (Left: Clubs) -->
           <div class="spine-branch-row row-left">
             <div class="pillar-card">
               <div class="pillar-top">
                 <div class="pillar-icon-box">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4m10-2h.01m-3 0h.01"></path></svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                 </div>
-                <span class="pillar-number">PILIER 03</span>
+                <span class="pillar-number">PILLAR 03</span>
               </div>
-              <h3 class="pillar-title">Gaming Arena &amp; Tournois Esports</h3>
-              <p class="pillar-desc">
-                Parce qu'un bon développeur sait aussi clutch en fin de manche. Nous structurons des tournois réguliers avec diffusion live sur grand écran et cast enflammé.
-              </p>
-              <ul class="pillar-features-list">
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Ligue Valorant, CS2 &amp; Rocket League sur réseau local basse latence
-                </li>
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Tournois FIFA &amp; jeux de combat le vendredi après-midi
-                </li>
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Streaming Twitch des finales avec commentateurs étudiants
-                </li>
-              </ul>
+              <h3 class="pillar-title">Clubs</h3>
+              <div class="pillar-tagline">Continuous skills practice.</div>
+              <div class="pillar-why-box">
+                <div class="pillar-why-label">OUR WHY</div>
+                <p class="pillar-why-text">
+                  Clubs are the core training ground, with YouPulse and the clubs leading every stage of development.
+                </p>
+              </div>
             </div>
 
             <div class="spine-node-column">
@@ -257,7 +249,7 @@
             </div>
           </div>
 
-          <!-- Branch 04 (Right) -->
+          <!-- Branch 04 (Right: Professional) -->
           <div class="spine-branch-row row-right">
             <div class="spine-node-column">
               <div class="spine-center-node">
@@ -270,28 +262,18 @@
             <div class="pillar-card">
               <div class="pillar-top">
                 <div class="pillar-icon-box">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                 </div>
-                <span class="pillar-number">PILIER 04</span>
+                <span class="pillar-number">PILLAR 04</span>
               </div>
-              <h3 class="pillar-title">Transparence &amp; Voix Étudiante</h3>
-              <p class="pillar-desc">
-                Le BDE appartient à tous les étudiants. Pas de décisions à huis clos : communication claire de chaque budget et porte-voix direct auprès de l’équipe pédagogique.
-              </p>
-              <ul class="pillar-features-list">
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Canal direct de feedback anonyme pour résoudre les problèmes du quotidien
-                </li>
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Publication transparente des comptes et budgets de chaque événement
-                </li>
-                <li class="pillar-feature-item">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Aide logistique et financière pour tous les clubs étudiants du campus
-                </li>
-              </ul>
+              <h3 class="pillar-title">Professional</h3>
+              <div class="pillar-tagline">Direct industry networking.</div>
+              <div class="pillar-why-box">
+                <div class="pillar-why-label">OUR WHY</div>
+                <p class="pillar-why-text">
+                  YouPulse strengthens YouCode's standing with industry and shows students the support they can count on in any situation.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -299,31 +281,208 @@
 
       </section>
 
-      <!-- Les Cartes de Membres (The 6 Cores) -->
-      <section id="equipe" class="members-section">
+
+      <!-- Student Clubs Grid (Slide 9) -->
+      <section id="clubs" class="clubs-section">
         
         <div class="section-head">
-          <span class="section-tag">LES 6 CORES DU BUREAU</span>
-          <h2 class="section-heading">L'ÉQUIPE <span>YOUPULSE</span></h2>
+          <span class="section-tag">CAMPUS LIFE</span>
+          <h2 class="section-heading">STUDENT <span>CLUBS</span></h2>
           <p class="section-sub">
-            Six personnalités complémentaires, engagées pour donner le meilleur rythme à votre année.
+            The core training ground where peers practice, build hardware, and launch projects.
           </p>
         </div>
 
-        <!-- 6 Cybernetic Member Cards Grid (Rendered dynamically by main.js) -->
+        <div class="clubs-dual-container">
+          
+          <!-- Category 1: Technical & Media -->
+          <div class="club-category-col">
+            <h3 class="club-col-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              Technical &amp; Media
+            </h3>
+            <div class="clubs-subgrid">
+              <div class="club-item-card">
+                <span class="club-name">Cybersecurity</span>
+                <span class="club-activity">Local CTFs &amp; ethical hacking</span>
+              </div>
+              <div class="club-item-card">
+                <span class="club-name">Web</span>
+                <span class="club-activity">Architecture workshops &amp; dev sprints</span>
+              </div>
+              <div class="club-item-card">
+                <span class="club-name">Robotics</span>
+                <span class="club-activity">Hardware building &amp; IoT prototyping</span>
+              </div>
+              <div class="club-item-card">
+                <span class="club-name">Media</span>
+                <span class="club-activity">YouCode News, streaming &amp; photography</span>
+              </div>
+              <!-- Inline indicator: more clubs coming -->
+              <div class="club-item-card club-more-inline-card">
+                <div class="more-card-beacon-wrap">
+                  <span class="more-card-pulse-dot"></span>
+                  <span class="more-card-tag">+ MORE TECH SQUADS</span>
+                </div>
+                <span class="club-activity">AI &amp; Data, Mobile Dev, Cloud Computing</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 2: Culture & Community -->
+          <div class="club-category-col">
+            <h3 class="club-col-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+              Culture &amp; Community
+            </h3>
+            <div class="clubs-subgrid">
+              <div class="club-item-card">
+                <span class="club-name">Art</span>
+                <span class="club-activity">Digital challenges &amp; visual crafts</span>
+              </div>
+              <div class="club-item-card">
+                <span class="club-name">Voluntary</span>
+                <span class="club-activity">Blood donation &amp; charity drives</span>
+              </div>
+              <div class="club-item-card">
+                <span class="club-name">Entrepreneurs</span>
+                <span class="club-activity">Idea pitch &amp; startup incubation</span>
+              </div>
+              <div class="club-item-card">
+                <span class="club-name">Board Games</span>
+                <span class="club-activity">Original creation &amp; strategic tournaments</span>
+              </div>
+              <!-- Inline indicator: more clubs coming -->
+              <div class="club-item-card club-more-inline-card">
+                <div class="more-card-beacon-wrap">
+                  <span class="more-card-pulse-dot"></span>
+                  <span class="more-card-tag">+ MORE CAMPUS SQUADS</span>
+                </div>
+                <span class="club-activity">E-Sports League, Chess, Cinema &amp; Debate</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Distinct Indicator: More Clubs & Student Initiatives Indicator ("Machi Ghir Hadi") -->
+        <div class="clubs-expansion-banner">
+          <div class="expansion-banner-glow" aria-hidden="true"></div>
+          
+          <div class="expansion-left">
+            <div class="expansion-status-pill">
+              <span class="expansion-beacon"></span>
+              <span class="expansion-pill-text">EXPANDING SQUAD NETWORK // MACHI GHIR HADI</span>
+            </div>
+            <h3 class="expansion-title">
+              PLUS DE CLUBS EN COURS DE DÉPLOIEMENT
+            </h3>
+            <p class="expansion-desc">
+              Cette sélection n'est qu'un point de départ. YouPulse soutient, incube et finance toute nouvelle initiative étudiante tout au long de l'année.
+            </p>
+          </div>
+
+          <div class="expansion-tags">
+            <span class="expansion-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              AI &amp; Data Science
+            </span>
+            <span class="expansion-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Mobile &amp; Flutter
+            </span>
+            <span class="expansion-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              E-Sports Arena
+            </span>
+            <span class="expansion-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Chess &amp; Strategy
+            </span>
+            <div class="expansion-cta-box">
+              <span class="pulse-spark"></span>
+              <span>LANCEZ VOTRE CLUB AVEC YOUPULSE</span>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- The 6 Cores Team Section -->
+      <section id="team" class="members-section">
+        
+        <div class="section-head">
+          <span class="section-tag">EXECUTIVE BUREAU</span>
+          <h2 class="section-heading">THE CORE TEAM OF <span>YOUPULSE</span></h2>
+          <p class="section-sub">
+            The student leaders orchestrating integration, hackathons, clubs, and partnerships across YouCode.
+          </p>
+        </div>
+
+        <!-- 9 Cybernetic Member Cards Grid (Rendered dynamically by main.js) -->
         <div id="members-grid" class="members-grid">
           <!-- Populated by JavaScript with new cybernetic card design -->
         </div>
 
       </section>
-
     </main>
 
-    <!-- The Bouncing Hamster & Time-Only Modal (No text, No emojis) -->
-    <div id="hamster-modal" class="hamster-modal-overlay" role="dialog" aria-modal="true" aria-label="Programme Secret YouPulse">
+    <!-- 1. The Welcome "Voir Programme" Popup (Triggers on first visit) -->
+    <div id="welcome-teaser-modal" class="welcome-modal-overlay" role="dialog" aria-modal="true" aria-label="Annonce Officielle Programme YouPulse">
+      <div class="welcome-modal-card">
+        
+        <button id="welcome-close-btn" class="welcome-modal-close" type="button" aria-label="Fermer la fenêtre">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="welcome-modal-glow" aria-hidden="true"></div>
+
+        <div class="welcome-badge-row">
+          <div class="welcome-live-pill">
+            <span class="welcome-live-dot"></span>
+            <span>ACCÈS EXCLUSIF // BDE YOUPULSE</span>
+          </div>
+        </div>
+
+        <h3 class="welcome-title">
+          LE PROGRAMME <span class="gradient-blue">2026 - 2027</span>
+        </h3>
+
+        <p class="welcome-desc">
+          Hackathons, intégration, tournois et clubs étudiants. Souhaitez-vous le consulter ?
+        </p>
+
+        <div class="welcome-actions">
+          <button id="btn-welcome-view" class="welcome-btn-primary" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <span>VOIR LE PROGRAMME</span>
+            <span class="welcome-btn-glow"></span>
+          </button>
+
+          <button id="btn-welcome-skip" class="welcome-btn-secondary" type="button">
+            Plus tard, explorer le site
+          </button>
+        </div>
+
+        <div class="welcome-footer-tag">
+          CONFIDENTIAL ACCESS · YOUCODE YOUSSOUFIA
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2. The Bouncing Hamster & Time-Only Modal (Revealed when user clicks Voir Programme) -->
+    <div id="hamster-modal" class="hamster-modal-overlay" role="dialog" aria-modal="true" aria-label="Secret Programme YouPulse">
       <div class="hamster-modal-window">
         
-        <button id="modal-close-icon" class="modal-close-icon" type="button" aria-label="Fermer">
+        <button id="modal-close-icon" class="modal-close-icon" type="button" aria-label="Close">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
 
@@ -331,7 +490,7 @@
         <div class="hamster-pump-wrapper">
           <div class="hamster-pump-ring"></div>
           <div class="hamster-pump-ring"></div>
-          <div id="bouncing-hamster-pic" class="hamster-bouncing-avatar" title="Cliquez sur le hamster">
+          <div id="bouncing-hamster-pic" class="hamster-bouncing-avatar" title="Click on the hamster">
             <img src="assets/images/hamster_shhh.jpg" alt="Hamster Silence" />
           </div>
         </div>
@@ -342,11 +501,11 @@
           <div class="countdown-digits-grid">
             <div class="digit-box">
               <span class="digit-num" id="count-days">00</span>
-              <span class="digit-lbl">Jours</span>
+              <span class="digit-lbl">Days</span>
             </div>
             <div class="digit-box">
               <span class="digit-num" id="count-hours">00</span>
-              <span class="digit-lbl">Heures</span>
+              <span class="digit-lbl">Hours</span>
             </div>
             <div class="digit-box">
               <span class="digit-num" id="count-mins">00</span>
@@ -354,7 +513,7 @@
             </div>
             <div class="digit-box">
               <span class="digit-num" id="count-secs">00</span>
-              <span class="digit-lbl">Secondes</span>
+              <span class="digit-lbl">Seconds</span>
             </div>
           </div>
         </div>
@@ -362,13 +521,21 @@
       </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer (Slide 13: Student Participation At the Centre) -->
     <footer class="site-footer">
       <div class="footer-inner">
-        <img src="assets/images/logo_dark.png" alt="YouPulse BDE YouCode Youssoufia" class="footer-logo" />
-        <p class="footer-credits">
-          © 2026 YouPulse • Bureau des Étudiants de YouCode Youssoufia.
-        </p>
+        <div class="footer-top-row">
+          <img src="assets/images/logo_dark.png" alt="YouPulse BDE YouCode" class="footer-logo" />
+          <div class="footer-motto-tag">CONNECT. COMPETE. COME ALIVE.</div>
+        </div>
+        <div class="footer-bottom-row">
+          <p class="footer-credits">
+            © 2026 YouPulse • The BDE of YouCode • Building a shared ecosystem of integration, competition, and professional growth.
+          </p>
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--blue-glow);">
+            ALL SYSTEMS SYNCHRONIZED // YOUCODE YOUSSOUFIA
+          </span>
+        </div>
       </div>
     </footer>
 
