@@ -339,98 +339,343 @@ class SoundWaveEngine {
   }
 }
 
-// --- 3. The Official Members Dataset (9 Cores of YouPulse - Zero Emojis) ---
+// --- 3. Complete Bilingual Content Engine (ENG <-> FR) ---
+const TRANSLATIONS = {
+  en: {
+    page_title: "YouPulse",
+    page_meta_desc: "YouPulse - The BDE of YouCode. Events & Activities Plan. Connect. Compete. Come Alive.",
+    nav_pillars: "Pillars",
+    nav_clubs: "Clubs",
+    nav_team: "Team",
+    header_secret_cta: "SECRET PROGRAMME",
+    hero_campus_badge: "YOUPULSE · THE BDE OF YOUCODE",
+    hero_motto: "CONNECT. COMPETE. COME ALIVE.",
+    hero_headline: `EVENTS & ACTIVITIES <br /><span class="gradient-blue">PLAN 2026 - 2027</span>`,
+    hero_subtext: "Annual programme for students and professional partners. The Pulse of YouCode: uniting peer-learning, national hackathons, esports arenas, and student wellbeing.",
+    btn_discover_program: "DISCOVER THE PROGRAMME",
+    btn_status_day: "MONDAY (NHAR TNIN)",
+    btn_four_pillars: "FOUR ENGAGEMENT PILLARS",
+    hud_synth_active: "AUDIO-SYNTH ACTIVE //",
+    hud_synth_desc: "Move mouse or click to modulate soundwaves",
+    pillars_tag: "STRATEGIC OVERVIEW",
+    pillars_heading: `FOUR ENGAGEMENT <span>PILLARS</span>`,
+    pillars_sub: "Why YouPulse Wanted to Be the BDE. The core foundation driving every event, competition, and student experience.",
+    pillar_01_num: "PILLAR 01",
+    pillar_01_title: "Integration",
+    pillar_01_tagline: "Shared campus experiences.",
+    pillar_01_why: "YouPulse puts YouCode on the map, giving it the visibility and standing of any major school on a global scale.",
+    pillar_02_num: "PILLAR 02",
+    pillar_02_title: "Competitions",
+    pillar_02_tagline: "Intense technical hackathons.",
+    pillar_02_why: "YouPulse raises the bar, preparing every participant for tougher and newer challenges.",
+    pillar_03_num: "PILLAR 03",
+    pillar_03_title: "Clubs",
+    pillar_03_tagline: "Continuous skills practice.",
+    pillar_03_why: "Clubs are the core training ground, with YouPulse and the clubs leading every stage of development.",
+    pillar_04_num: "PILLAR 04",
+    pillar_04_title: "Professional",
+    pillar_04_tagline: "Direct industry networking.",
+    pillar_04_why: "YouPulse strengthens YouCode's standing with industry and shows students the support they can count on in any situation.",
+    pillar_why_label: "OUR WHY",
+    clubs_tag: "CAMPUS LIFE",
+    clubs_heading: `STUDENT <span>CLUBS</span>`,
+    clubs_sub: "The core training ground where peers practice, build hardware, and launch projects.",
+    clubs_col_tech: "Technical",
+    club_cyber_name: "Cybersecurity",
+    club_cyber_activity: "Local CTFs & ethical hacking",
+    club_web_name: "Web",
+    club_web_activity: "Architecture workshops & dev sprints",
+    club_robotics_name: "Robotics",
+    club_robotics_activity: "Hardware building & IoT prototyping",
+    club_more_tech: "+ MORE TECH SQUADS",
+    clubs_col_culture: "Culture & Community",
+    club_art_name: "Art",
+    club_art_activity: "Digital challenges & visual crafts",
+    club_voluntary_name: "Voluntary",
+    club_voluntary_activity: "Blood donation & charity drives",
+    club_entrepreneurs_name: "Entrepreneurs",
+    club_entrepreneurs_activity: "Idea pitch & startup incubation",
+    club_boardgames_name: "Board Games",
+    club_boardgames_activity: "Original creation & strategic tournaments",
+    club_comm_name: "Communication",
+    club_comm_activity: "Campus storytelling, event coverage & digital PR",
+    club_more_campus: "+ MORE CAMPUS SQUADS",
+    expansion_pill: "EXPANDING SQUAD NETWORK // MACHI GHIR HADI",
+    expansion_title: "MORE CLUBS CURRENTLY IN DEPLOYMENT",
+    expansion_desc: "This selection is just the starting point. YouPulse supports, incubates, and funds any new student initiative throughout the year.",
+    expansion_chip_ai: "AI & Data Science",
+    expansion_chip_mobile: "Mobile & Flutter",
+    expansion_chip_esports: "E-Sports Arena",
+    expansion_chip_chess: "Chess & Strategy",
+    expansion_cta_text: "LAUNCH YOUR CLUB WITH YOUPULSE",
+    team_tag: "EXECUTIVE BUREAU",
+    team_heading: `THE CORE TEAM OF <span>YOUPULSE</span>`,
+    team_sub: "The student leaders orchestrating integration, hackathons, clubs, and partnerships across YouCode.",
+    card_core_label: "CORE",
+    card_campus: "YOUCODE YOUSSOUFIA",
+    card_dossier: "DOSSIER",
+    welcome_pill: "EXCLUSIVE ACCESS // BDE YOUPULSE",
+    welcome_title: `THE PROGRAMME <span class="gradient-blue">2026 - 2027</span>`,
+    welcome_desc: "Hackathons, integration, tournaments, and student clubs. Would you like to check it out?",
+    welcome_btn_view: "VIEW THE PROGRAMME",
+    welcome_btn_skip: "Later, explore the website",
+    welcome_footer: "CONFIDENTIAL ACCESS · YOUCODE YOUSSOUFIA",
+    hamster_embargo: "OFFICIAL RELEASE IN (MONDAY - NHAR TNIN)",
+    count_days: "Days",
+    count_hours: "Hours",
+    count_mins: "Minutes",
+    count_secs: "Seconds",
+    footer_motto: "CONNECT. COMPETE. COME ALIVE.",
+    footer_credits: "© 2026 YouPulse • The BDE of YouCode • Building a shared ecosystem of integration, competition, and professional growth.",
+    footer_sync: "ALL SYSTEMS SYNCHRONIZED // YOUCODE YOUSSOUFIA"
+  },
+  fr: {
+    page_title: "YouPulse",
+    page_meta_desc: "YouPulse - Le BDE de YouCode. Plan d'Événements & Activités. Connecter. Concourir. S'épanouir.",
+    nav_pillars: "Piliers",
+    nav_clubs: "Clubs",
+    nav_team: "Équipe",
+    header_secret_cta: "PROGRAMME SECRET",
+    hero_campus_badge: "YOUPULSE · LE BDE DE YOUCODE",
+    hero_motto: "CONNECTER. CONCOURIR. S'ÉPANOUIR.",
+    hero_headline: `PLAN D'ÉVÉNEMENTS &amp; ACTIVITÉS <br /><span class="gradient-blue">2026 - 2027</span>`,
+    hero_subtext: "Programme annuel pour étudiants et partenaires professionnels. Le pouls de YouCode : unifier peer-learning, hackathons nationaux, arènes esports et bien-être étudiant.",
+    btn_discover_program: "DÉCOUVRIR LE PROGRAMME",
+    btn_status_day: "NHAR TNIN (LUNDI)",
+    btn_four_pillars: "LES 4 PILIERS D'ENGAGEMENT",
+    hud_synth_active: "AUDIO-SYNTH ACTIF //",
+    hud_synth_desc: "Bougez la souris ou cliquez pour moduler les ondes",
+    pillars_tag: "VISION STRATÉGIQUE",
+    pillars_heading: `QUATRE PILIERS <span>D'ENGAGEMENT</span>`,
+    pillars_sub: "Pourquoi YouPulse s'engage pour le BDE. La fondation essentielle qui anime chaque événement, challenge et expérience étudiante.",
+    pillar_01_num: "PILIER 01",
+    pillar_01_title: "Intégration",
+    pillar_01_tagline: "Expériences partagées sur le campus.",
+    pillar_01_why: "YouPulse positionne YouCode au premier plan, en lui conférant la visibilité et le prestige d'une grande école de renommée.",
+    pillar_02_num: "PILIER 02",
+    pillar_02_title: "Compétitions",
+    pillar_02_tagline: "Hackathons techniques d'intensité.",
+    pillar_02_why: "YouPulse place la barre toujours plus haut, en préparant chaque étudiant à relever des défis techniques majeurs.",
+    pillar_03_num: "PILIER 03",
+    pillar_03_title: "Clubs",
+    pillar_03_tagline: "Pratique continue et projets concrets.",
+    pillar_03_why: "Les clubs constituent le véritable terrain d'entraînement, YouPulse et les clubs guidant chaque étape d'apprentissage.",
+    pillar_04_num: "PILIER 04",
+    pillar_04_title: "Professionnel",
+    pillar_04_tagline: "Réseautage direct avec l'écosystème tech.",
+    pillar_04_why: "YouPulse renforce la crédibilité de YouCode auprès des entreprises et offre aux étudiants un appui indéfectible.",
+    pillar_why_label: "NOTRE RAISON D'ÊTRE",
+    clubs_tag: "VIE ÉTUDIANTE",
+    clubs_heading: `CLUBS <span>ÉTUDIANTS</span>`,
+    clubs_sub: "Le terrain de jeu où les pairs s'entraînent, conçoivent du hardware et propulsent leurs projets.",
+    clubs_col_tech: "Technique",
+    club_cyber_name: "Cybersécurité",
+    club_cyber_activity: "CTFs locaux & hacking éthique",
+    club_web_name: "Web",
+    club_web_activity: "Ateliers d'architecture & sprints de dev",
+    club_robotics_name: "Robotique",
+    club_robotics_activity: "Conception matérielle & prototypage IoT",
+    club_more_tech: "+ D'ÉQUIPES TECHNIQUES",
+    clubs_col_culture: "Culture & Communauté",
+    club_art_name: "Art & Création",
+    club_art_activity: "Défis graphiques & création visuelle",
+    club_voluntary_name: "Bénévolat",
+    club_voluntary_activity: "Dons du sang & actions solidaires",
+    club_entrepreneurs_name: "Entrepreneuriat",
+    club_entrepreneurs_activity: "Pitchs d'idées & incubation de startups",
+    club_boardgames_name: "Jeux de Stratégie",
+    club_boardgames_activity: "Créations originales & tournois stratégiques",
+    club_comm_name: "Communication",
+    club_comm_activity: "Storytelling du campus, couverture média & RP",
+    club_more_campus: "+ D'ÉQUIPES DU CAMPUS",
+    expansion_pill: "RÉSEAU EN EXPANSION // MACHI GHIR HADI",
+    expansion_title: "PLUS DE CLUBS EN COURS DE DÉPLOIEMENT",
+    expansion_desc: "Cette sélection n'est qu'un point de départ. YouPulse soutient, incube et finance toute nouvelle initiative étudiante tout au long de l'année.",
+    expansion_chip_ai: "IA & Data Science",
+    expansion_chip_mobile: "Mobile & Flutter",
+    expansion_chip_esports: "Arène E-Sports",
+    expansion_chip_chess: "Échecs & Stratégie",
+    expansion_cta_text: "LANCEZ VOTRE CLUB AVEC YOUPULSE",
+    team_tag: "BUREAU EXÉCUTIF",
+    team_heading: `L'ÉQUIPE FONDATRICE DE <span>YOUPULSE</span>`,
+    team_sub: "Les leaders étudiants orchestrant l'intégration, les hackathons, les clubs et les partenariats à YouCode.",
+    card_core_label: "CORE",
+    card_campus: "YOUCODE YOUSSOUFIA",
+    card_dossier: "DOSSIER",
+    welcome_pill: "ACCÈS EXCLUSIF // BDE YOUPULSE",
+    welcome_title: `LE PROGRAMME <span class="gradient-blue">2026 - 2027</span>`,
+    welcome_desc: "Hackathons, intégration, tournois et clubs étudiants. Souhaitez-vous le consulter ?",
+    welcome_btn_view: "VOIR LE PROGRAMME",
+    welcome_btn_skip: "Plus tard, explorer le site",
+    welcome_footer: "ACCÈS CONFIDENTIEL · YOUCODE YOUSSOUFIA",
+    hamster_embargo: "OUVERTURE OFFICIELLE DANS (NHAR TNIN)",
+    count_days: "Jours",
+    count_hours: "Heures",
+    count_mins: "Minutes",
+    count_secs: "Secondes",
+    footer_motto: "CONNECTER. CONCOURIR. S'ÉPANOUIR.",
+    footer_credits: "© 2026 YouPulse • Le BDE de YouCode • Bâtir un écosystème partagé d'intégration, de compétition et d'essor professionnel.",
+    footer_sync: "TOUS LES SYSTÈMES SYNCHRONISÉS // YOUCODE YOUSSOUFIA"
+  }
+};
+
+let currentLang = localStorage.getItem('youpulse_lang') || 'en';
+
+// --- 4. The Official Members Dataset (9 Cores of YouPulse - Zero Emojis) ---
 const MEMBERS_DATA = [
   {
     id: 'adam',
     number: '07',
     callsign: 'NEXUS',
     name: 'Adam Aarboubaa',
-    role: 'Président',
+    role: {
+      en: 'President',
+      fr: 'Président'
+    },
     photo: 'assets/images/adam.png',
-    tagline: 'Insuffler une vision ambitieuse, fédérer les talents de YouCode et transformer nos idées en impact réel.'
+    tagline: {
+      en: 'Instilling an ambitious vision, uniting YouCode talents, and transforming our ideas into real impact.',
+      fr: 'Insuffler une vision ambitieuse, fédérer les talents de YouCode et transformer nos idées en impact réel.'
+    }
   },
   {
     id: 'otmane',
     number: '05',
     callsign: 'PRISM',
     name: 'Otman Mellouki',
-    role: 'Secrétaire Général',
+    role: {
+      en: 'General Secretary',
+      fr: 'Secrétaire Général'
+    },
     photo: 'assets/images/otmane.png',
-    tagline: 'Assurer la rigueur administrative, fluidifier la coordination interne et structurer chaque action du BDE.'
+    tagline: {
+      en: 'Ensuring administrative rigor, streamlining internal coordination, and structuring every BDE action.',
+      fr: 'Assurer la rigueur administrative, fluidifier la coordination interne et structurer chaque action du BDE.'
+    }
   },
   {
     id: 'oumaima',
     number: '06',
     callsign: 'PULSE',
     name: 'Oumaima Boushama',
-    role: 'Vice-Présidente',
+    role: {
+      en: 'Vice President',
+      fr: 'Vice-Présidente'
+    },
     photo: 'assets/images/oumaima.jpg',
-    tagline: 'Co-piloter la vision YouPulse, être à l’écoute de chaque promo et garantir la cohésion de l’équipe.'
+    tagline: {
+      en: 'Co-steering the YouPulse vision, listening to every cohort, and guaranteeing team synergy.',
+      fr: 'Co-piloter la vision YouPulse, être à l’écoute de chaque promo et garantir la cohésion de l’équipe.'
+    }
   },
   {
     id: 'kadiri-mohammed',
     number: '01',
     callsign: 'LEAD',
-    name: 'Mohammed Kadiri',
-    role: 'Responsable Communication',
+    name: 'Mohamed Kadiri',
+    role: {
+      en: 'Head of Communication',
+      fr: 'Responsable Communication'
+    },
     photo: 'assets/images/kadiri.jpg',
-    tagline: 'Porter la voix de YouPulse, connecter les étudiants et faire résonner chaque initiative sur tout le campus.'
+    tagline: {
+      en: 'Carrying the voice of YouPulse, connecting students, and amplifying every initiative across campus.',
+      fr: 'Porter la voix de YouPulse, connecter les étudiants et faire résonner chaque initiative sur tout le campus.'
+    }
   },
   {
     id: 'fatima',
     number: '02',
     callsign: 'FLUX',
     name: 'Fatima Id Ali',
-    role: 'Responsable Clubs',
+    role: {
+      en: 'Head of Clubs',
+      fr: 'Responsable Clubs'
+    },
     photo: 'assets/images/fatima.jpg',
-    tagline: 'Fédérer les passions, accompagner chaque club étudiant et créer une communauté active et innovante.'
+    tagline: {
+      en: 'Uniting passions, mentoring every student club, and fostering an active, innovative community.',
+      fr: 'Fédérer les passions, accompagner chaque club étudiant et créer une communauté active et innovante.'
+    }
   },
   {
     id: 'anas',
     number: '03',
     callsign: 'CIPHER',
     name: 'Anas Boutbagha',
-    role: 'Responsable Événements',
+    role: {
+      en: 'Head of Events',
+      fr: 'Responsable Événements'
+    },
     photo: 'assets/images/anas.jpg',
-    tagline: 'Concevoir des hackathons intenses, des compétitions stimulantes et des temps forts inoubliables.'
+    tagline: {
+      en: 'Designing intense hackathons, electrifying competitions, and unforgettable student highlights.',
+      fr: 'Concevoir des hackathons intenses, des compétitions stimulantes et des temps forts inoubliables.'
+    }
   },
   {
     id: 'hiba',
     number: '04',
     callsign: 'ECHO',
     name: 'Hiba Zakif',
-    role: 'Responsable Média',
+    role: {
+      en: 'Head of Media',
+      fr: 'Responsable Média'
+    },
     photo: 'assets/images/hiba.jpg',
-    tagline: 'Capturer l’énergie du campus, produire des visuels percutants et valoriser les réussites de YouCode.'
+    tagline: {
+      en: 'Capturing campus energy, producing striking visuals, and spotlighting YouCode achievements.',
+      fr: 'Capturer l’énergie du campus, produire des visuels percutants et valoriser les réussites de YouCode.'
+    }
   },
   {
     id: 'achraf',
     number: '08',
     callsign: 'BLAZE',
     name: 'Achraf Abdelhakim Es-saloua',
-    role: 'Responsable Événements',
+    role: {
+      en: 'Head of Events',
+      fr: 'Responsable Événements'
+    },
     photo: 'assets/images/achraf.jpg',
-    tagline: 'Dynamiser la vie étudiante par des challenges stimulants, une régie réactive et une ambiance unique.'
+    tagline: {
+      en: 'Energizing student life with thrilling challenges, responsive production, and an electric atmosphere.',
+      fr: 'Dynamiser la vie étudiante par des challenges stimulants, une régie réactive et une ambiance unique.'
+    }
   },
   {
     id: 'redouane',
     number: '09',
     callsign: 'VOLT',
     name: 'Ridouane El Habib',
-    role: 'Trésorier',
+    role: {
+      en: 'Treasurer',
+      fr: 'Trésorier'
+    },
     photo: 'assets/images/redouane.jpg',
-    tagline: 'Gestion financière rigoureuse, transparence totale et optimisation des budgets pour financer nos ambitions.'
+    tagline: {
+      en: 'Rigorous financial management, full transparency, and budget optimization to fund our ambitions.',
+      fr: 'Gestion financière rigoureuse, transparence totale et optimisation des budgets pour financer nos ambitions.'
+    }
   }
 ];
 
-// --- 4. Render Redesigned Cybernetic Cards ---
-function renderMemberCards() {
+// --- 5. Render Redesigned Cybernetic Cards (Bilingual) ---
+function renderMemberCards(lang = currentLang) {
   const container = document.getElementById('members-grid');
   if (!container) return;
 
-  container.innerHTML = MEMBERS_DATA.map(m => `
-    <article class="member-card" data-id="${m.id}" tabindex="0" role="button" aria-label="Voir le profil de ${m.name}">
+  const campusText = TRANSLATIONS[lang]?.card_campus || 'YOUCODE YOUSSOUFIA';
+  const dossierText = TRANSLATIONS[lang]?.card_dossier || 'DOSSIER';
+  const coreLabel = TRANSLATIONS[lang]?.card_core_label || 'CORE';
+
+  container.innerHTML = MEMBERS_DATA.map(m => {
+    const role = typeof m.role === 'object' ? (m.role[lang] || m.role.en) : m.role;
+    const tagline = typeof m.tagline === 'object' ? (m.tagline[lang] || m.tagline.en) : m.tagline;
+    const ariaLabel = lang === 'fr' ? `Voir le profil de ${m.name}` : `View profile of ${m.name}`;
+
+    return `
+    <article class="member-card" data-id="${m.id}" tabindex="0" role="button" aria-label="${ariaLabel}">
       
       <!-- Tech Corner Accents [ + ] -->
       <div class="card-tech-corners" aria-hidden="true"></div>
@@ -439,7 +684,7 @@ function renderMemberCards() {
       <div class="card-meta-bar">
         <span class="card-callsign-tag">
           <span class="tag-dot"></span>
-          CORE #${m.number} // ${m.callsign}
+          ${coreLabel} #${m.number} // ${m.callsign}
         </span>
         <div class="card-frequency-indicator" aria-hidden="true">
           <span class="mini-bar"></span>
@@ -452,7 +697,7 @@ function renderMemberCards() {
       <!-- Photo with Holographic Scanline -->
       <div class="card-photo-wrapper">
         <div class="card-portrait-scanline" aria-hidden="true"></div>
-        <img class="card-portrait-img" src="${m.photo}" alt="${m.name} - ${m.role}" loading="lazy" />
+        <img class="card-portrait-img" src="${m.photo}" alt="${m.name} - ${role}" loading="lazy" />
         <div class="card-portrait-gradient" aria-hidden="true"></div>
       </div>
 
@@ -460,24 +705,109 @@ function renderMemberCards() {
       <div class="card-content">
         <div class="card-role-badge">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-          ${m.role}
+          ${role}
         </div>
         <h3 class="card-name-title">${m.name}</h3>
-        <p class="card-mission-text">${m.tagline}</p>
+        <p class="card-mission-text">${tagline}</p>
 
         <div class="card-footer-action">
-          <span class="card-campus-code">YOUCODE YOUSSOUFIA</span>
-          <button class="btn-inspect-dossier" type="button">
-            DOSSIER
+          <span class="card-campus-code">${campusText}</span>
+          <button class="btn-inspect-dossier" type="button" aria-label="${dossierText} ${m.name}">
+            ${dossierText}
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
         </div>
       </div>
 
     </article>
-  `).join('');
+    `;
+  }).join('');
 
   initMemberCardTilt();
+}
+
+// --- 6. Language Switcher Engine (ENG <-> FR) ---
+function setLanguage(lang, playAudio = false) {
+  if (!TRANSLATIONS[lang]) return;
+  currentLang = lang;
+  localStorage.setItem('youpulse_lang', lang);
+  document.documentElement.lang = lang;
+
+  // 1. Update Document Title & Meta Description
+  if (TRANSLATIONS[lang].page_title) {
+    document.title = TRANSLATIONS[lang].page_title;
+  }
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && TRANSLATIONS[lang].page_meta_desc) {
+    metaDesc.setAttribute('content', TRANSLATIONS[lang].page_meta_desc);
+  }
+
+  // 2. Update Header Language Switch Button State
+  const langBtn = document.getElementById('lang-switch-btn');
+  if (langBtn) {
+    langBtn.setAttribute('data-current-lang', lang);
+    const badges = langBtn.querySelectorAll('.lang-badge');
+    badges.forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+  }
+
+  // 3. Update all plain text elements with [data-i18n]
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (TRANSLATIONS[lang][key] !== undefined) {
+      el.textContent = TRANSLATIONS[lang][key];
+    }
+  });
+
+  // 4. Update all HTML-formatted elements with [data-i18n-html]
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (TRANSLATIONS[lang][key] !== undefined) {
+      el.innerHTML = TRANSLATIONS[lang][key];
+    }
+  });
+
+  // 5. Re-render Member Cards with the selected language
+  renderMemberCards(lang);
+
+  // 6. Smooth Subtle Micro-Fade Transition across Main Content
+  const animatedSections = document.querySelectorAll('.hero-wrap, .pillars-section, .clubs-section, .members-section');
+  animatedSections.forEach(section => {
+    section.classList.remove('lang-fade-transition');
+    void section.offsetWidth; // trigger reflow for smooth re-trigger
+    section.classList.add('lang-fade-transition');
+  });
+
+  if (playAudio) {
+    sound.playHoverBlip(lang === 'en' ? 700 : 860);
+  }
+}
+
+function initLanguageSwitcher() {
+  const langBtn = document.getElementById('lang-switch-btn');
+  if (langBtn) {
+    langBtn.addEventListener('click', (e) => {
+      const clickedBadge = e.target.closest('.lang-badge');
+      let targetLang;
+      if (clickedBadge) {
+        targetLang = clickedBadge.getAttribute('data-lang');
+      } else {
+        targetLang = currentLang === 'en' ? 'fr' : 'en';
+      }
+
+      if (targetLang && targetLang !== currentLang) {
+        setLanguage(targetLang, true);
+      } else {
+        // Toggle if user clicks anywhere on the button
+        const nextLang = currentLang === 'en' ? 'fr' : 'en';
+        setLanguage(nextLang, true);
+      }
+    });
+  }
+
+  // Apply initially active language
+  setLanguage(currentLang, false);
 }
 
 // --- 5. 3D Perspective Tilt on Member Cards ---
@@ -594,8 +924,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // A. Start sound wave canvas engine
   const waveEngine = new SoundWaveEngine('soundwave-canvas');
 
-  // B. Render redesigned cybernetic members cards
-  renderMemberCards();
+  // B. Initialize Bilingual Language Switcher (applies saved/default language and renders cards)
+  initLanguageSwitcher();
 
   // C. Start countdown
   updateCountdown();
