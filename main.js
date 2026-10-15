@@ -353,7 +353,7 @@ const TRANSLATIONS = {
     hero_headline: `EVENTS & ACTIVITIES <br /><span class="gradient-blue">PLAN 2026 - 2027</span>`,
     hero_subtext: "Annual programme for students and professional partners. The Pulse of YouCode: uniting peer-learning, national hackathons, esports arenas, and student wellbeing.",
     btn_discover_program: "DISCOVER THE PROGRAMME",
-    btn_status_day: "MONDAY (NHAR TNIN)",
+    btn_status_day: "TOMORROW 14:00",
     btn_four_pillars: "FOUR ENGAGEMENT PILLARS",
     hud_synth_active: "AUDIO-SYNTH ACTIVE //",
     hud_synth_desc: "Move mouse or click to modulate soundwaves",
@@ -420,7 +420,7 @@ const TRANSLATIONS = {
     welcome_btn_view: "VIEW THE PROGRAMME",
     welcome_btn_skip: "Later, explore the website",
     welcome_footer: "CONFIDENTIAL ACCESS · YOUCODE YOUSSOUFIA",
-    hamster_embargo: "OFFICIAL RELEASE IN (MONDAY - NHAR TNIN)",
+    hamster_embargo: "OFFICIAL RELEASE TOMORROW AT 14:00",
     count_days: "Days",
     count_hours: "Hours",
     count_mins: "Minutes",
@@ -441,7 +441,7 @@ const TRANSLATIONS = {
     hero_headline: `PLAN D'ÉVÉNEMENTS &amp; ACTIVITÉS <br /><span class="gradient-blue">2026 - 2027</span>`,
     hero_subtext: "Programme annuel pour étudiants et partenaires professionnels. Le pouls de YouCode : unifier peer-learning, hackathons nationaux, arènes esports et bien-être étudiant.",
     btn_discover_program: "DÉCOUVRIR LE PROGRAMME",
-    btn_status_day: "NHAR TNIN (LUNDI)",
+    btn_status_day: "DEMAIN 14:00 (GHDA)",
     btn_four_pillars: "LES 4 PILIERS D'ENGAGEMENT",
     hud_synth_active: "AUDIO-SYNTH ACTIF //",
     hud_synth_desc: "Bougez la souris ou cliquez pour moduler les ondes",
@@ -508,7 +508,7 @@ const TRANSLATIONS = {
     welcome_btn_view: "VOIR LE PROGRAMME",
     welcome_btn_skip: "Plus tard, explorer le site",
     welcome_footer: "ACCÈS CONFIDENTIEL · YOUCODE YOUSSOUFIA",
-    hamster_embargo: "OUVERTURE OFFICIELLE DANS (NHAR TNIN)",
+    hamster_embargo: "OUVERTURE OFFICIELLE DEMAIN À 14:00",
     count_days: "Jours",
     count_hours: "Heures",
     count_mins: "Minutes",
@@ -837,26 +837,24 @@ function initMemberCardTilt() {
   });
 }
 
-// --- 6. Monday ("Nhar Tnin") Countdown Engine ---
-function getNextMondayAtNine() {
+// --- 6. Tomorrow 14:00 ("Ghda m3a 14:00") Countdown Engine ---
+function getProgrammeTargetDate() {
   const now = new Date();
-  const result = new Date(now);
-  const day = now.getDay(); // 0 is Sunday, 1 is Monday
 
-  let daysUntilMonday = (1 + 7 - day) % 7;
-  if (daysUntilMonday === 0 && now.getHours() >= 9) {
-    daysUntilMonday = 7;
-  } else if (daysUntilMonday === 0 && now.getHours() < 9) {
-    daysUntilMonday = 0;
+  // Primary Target: Friday 16 October 2026 at 14:00:00 (Tomorrow 14:00)
+  if (now.getFullYear() === 2026 && now.getMonth() === 9) {
+    return new Date(2026, 9, 16, 14, 0, 0);
   }
 
-  result.setDate(now.getDate() + daysUntilMonday);
-  result.setHours(9, 0, 0, 0); // 09:00 AM
-  return result;
+  // Universal dynamic fallback: tomorrow at 14:00:00
+  const target = new Date(now);
+  target.setDate(now.getDate() + 1);
+  target.setHours(14, 0, 0, 0);
+  return target;
 }
 
 function updateCountdown() {
-  const target = getNextMondayAtNine();
+  const target = getProgrammeTargetDate();
   const now = new Date();
   const diff = target - now;
 
@@ -864,12 +862,23 @@ function updateCountdown() {
   const hoursEl = document.getElementById('count-hours');
   const minsEl = document.getElementById('count-mins');
   const secsEl = document.getElementById('count-secs');
+  const embargoEl = document.querySelector('.time-embargo-label');
+  const statusPills = document.querySelectorAll('[data-i18n="btn_status_day"]');
 
   if (diff <= 0) {
     if (daysEl) daysEl.textContent = '00';
     if (hoursEl) hoursEl.textContent = '00';
     if (minsEl) minsEl.textContent = '00';
     if (secsEl) secsEl.textContent = '00';
+
+    if (embargoEl) {
+      embargoEl.textContent = currentLang === 'fr' 
+        ? 'LE PROGRAMME EST MAINTENANT DISPONIBLE !' 
+        : 'THE PROGRAMME IS NOW AVAILABLE!';
+    }
+    statusPills.forEach(p => {
+      p.textContent = currentLang === 'fr' ? 'DISPONIBLE' : 'NOW LIVE';
+    });
     return;
   }
 
