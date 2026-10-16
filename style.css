@@ -3320,14 +3320,12 @@ html.programme-locked-mode .programme-lock-screen {
 }
 
 .nav-link.nav-link-programme.is-nav-locked::after {
-  content: '🔒';
   font-size: 0.68rem;
   margin-left: 0.35rem;
   vertical-align: middle;
 }
 
 .nav-link.nav-link-programme.is-nav-unlocked::after {
-  content: '✨';
   font-size: 0.68rem;
   margin-left: 0.35rem;
   vertical-align: middle;
