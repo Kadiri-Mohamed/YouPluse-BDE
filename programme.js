@@ -41,6 +41,53 @@ class SoundSynth {
       osc.stop(now + 0.04);
     } catch (e) {}
   }
+
+  // Interactive Squeak on clicking the bouncing hamster
+  playHamsterSqueak() {
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(1200, now);
+      osc.frequency.exponentialRampToValueAtTime(2400, now + 0.08);
+      osc.frequency.exponentialRampToValueAtTime(800, now + 0.16);
+
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.16);
+    } catch (e) {}
+  }
+
+  // Celebratory cyber chime / unlock fanfare when timer hits 0
+  playUnlockFanfare() {
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      notes.forEach((freq, idx) => {
+        const now = this.ctx.currentTime + idx * 0.1;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.05, now + 0.35);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      });
+    } catch (e) {}
+  }
 }
 
 const sound = new SoundSynth();
@@ -78,15 +125,52 @@ class SoundWaveEngine {
 
   initParticles() {
     this.particles = [];
-    const count = Math.min(Math.floor(this.width / 24), 50);
+    // More numerous cosmic particles (120 to 150 on desktop)
+    const count = Math.min(Math.floor(this.width / 11), 140);
+    
     for (let i = 0; i < count; i++) {
+      const typeRand = Math.random();
+      let radius, baseAlpha, isGlowing, color;
+
+      if (typeRand < 0.6) {
+        // Small cosmic distant stars (60%)
+        radius = Math.random() * 1.3 + 0.9;
+        baseAlpha = Math.random() * 0.35 + 0.55; // 0.55 - 0.90 bright
+        isGlowing = false;
+        color = Math.random() > 0.4 ? '#ffffff' : '#38bdf8';
+      } else if (typeRand < 0.88) {
+        // Medium floating space particles (28%)
+        radius = Math.random() * 1.4 + 1.8;
+        baseAlpha = Math.random() * 0.25 + 0.75; // 0.75 - 1.0
+        isGlowing = Math.random() > 0.4;
+        color = Math.random() > 0.5 ? '#00d2ff' : '#60a5fa';
+      } else {
+        // Luminous glowing cosmic nodes (12%)
+        radius = Math.random() * 1.5 + 2.6;
+        baseAlpha = 0.95;
+        isGlowing = true;
+        color = '#00d2ff';
+      }
+
       this.particles.push({
         x: Math.random() * this.width,
         y: Math.random() * this.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 2 + 1,
-        color: Math.random() > 0.3 ? '#00d2ff' : '#0066ff'
+        // Zero-G drift velocities (slow, floating, graceful)
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        radius,
+        baseAlpha,
+        alpha: baseAlpha,
+        color,
+        isGlowing,
+        // Zero-gravity space floating wave params ("kay3omo f fada2")
+        wobble: Math.random() * Math.PI * 2,
+        wobbleSpeed: Math.random() * 0.015 + 0.008,
+        wobbleAmpX: Math.random() * 0.6 + 0.3,
+        wobbleAmpY: Math.random() * 0.6 + 0.3,
+        // Twinkle / Pulse
+        pulsePhase: Math.random() * Math.PI * 2,
+        pulseSpeed: Math.random() * 0.03 + 0.015
       });
     }
   }
@@ -110,65 +194,72 @@ class SoundWaveEngine {
 
   render() {
     this.ctx.clearRect(0, 0, this.width, this.height);
-    this.time += 0.018;
+    this.time += 0.015;
 
-    // Equalizer spectrum
-    const barWidth = this.width / this.eqBars;
-    for (let i = 0; i < this.eqBars; i++) {
-      const x = i * barWidth;
-      let mouseBoost = 0;
+    // 1. Faint cosmic constellation links between nearby floating stars
+    const len = this.particles.length;
+    for (let i = 0; i < len; i++) {
+      const p1 = this.particles[i];
+      for (let j = i + 1; j < len; j++) {
+        const p2 = this.particles[j];
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 75) {
+          const lineAlpha = (1 - dist / 75) * 0.22 * Math.min(p1.alpha, p2.alpha);
+          this.ctx.beginPath();
+          this.ctx.moveTo(p1.x, p1.y);
+          this.ctx.lineTo(p2.x, p2.y);
+          this.ctx.strokeStyle = `rgba(0, 210, 255, ${lineAlpha})`;
+          this.ctx.lineWidth = 0.85;
+          this.ctx.stroke();
+        }
+      }
+    }
+
+    // 2. Render each floating particle with zero-G drift & twinkling
+    for (let p of this.particles) {
+      // Zero-G undulating orbital drift ("kay3omo f fada2")
+      p.wobble += p.wobbleSpeed;
+      p.x += p.vx + Math.cos(p.wobble) * p.wobbleAmpX;
+      p.y += p.vy + Math.sin(p.wobble * 0.85) * p.wobbleAmpY;
+
+      // Mouse interactive micro-gravity deflection
       if (this.mouse.active) {
-        const d = Math.abs(x - this.mouse.x);
-        if (d < 250) {
-          mouseBoost = (1 - d / 250) * 80;
+        const mdx = this.mouse.x - p.x;
+        const mdy = this.mouse.y - p.y;
+        const mDist = Math.hypot(mdx, mdy);
+        if (mDist < 140) {
+          const repel = (1 - mDist / 140) * 1.2;
+          p.x -= (mdx / mDist) * repel;
+          p.y -= (mdy / mDist) * repel;
         }
       }
 
-      const freqHeight = Math.abs(Math.sin(i * 0.25 + this.time * 2.5)) * 50 + mouseBoost + 10;
-      const gradient = this.ctx.createLinearGradient(0, this.height - freqHeight, 0, this.height);
-      gradient.addColorStop(0, 'rgba(0, 210, 255, 0.35)');
-      gradient.addColorStop(1, 'rgba(0, 102, 255, 0.03)');
+      // Smooth wrap around edges
+      if (p.x < -10) p.x = this.width + 10;
+      if (p.x > this.width + 10) p.x = -10;
+      if (p.y < -10) p.y = this.height + 10;
+      if (p.y > this.height + 10) p.y = -10;
 
-      this.ctx.fillStyle = gradient;
-      this.ctx.fillRect(x + 2, this.height - freqHeight, barWidth - 4, freqHeight);
-    }
+      // Twinkle & Pulsate brightness ("soto3")
+      p.alpha = Math.max(0.35, Math.min(1, p.baseAlpha + Math.sin(this.time * 2 + p.pulsePhase) * 0.25));
 
-    // Sine Waves
-    const verticalGap = this.height / (this.waveLayers + 1);
-    for (let i = 0; i < this.waveLayers; i++) {
-      const baseY = verticalGap * (i + 1);
-      const freq = 0.0022 + i * 0.0004;
-      const baseAmp = 14 + (i % 3) * 6;
-      const alpha = 0.12 + (i / this.waveLayers) * 0.22;
-
-      this.ctx.beginPath();
-      this.ctx.strokeStyle = i % 2 === 0 ? `rgba(0, 210, 255, ${alpha})` : `rgba(0, 102, 255, ${alpha * 1.2})`;
-      this.ctx.lineWidth = i % 3 === 0 ? 2 : 1.2;
-
-      for (let x = 0; x <= this.width; x += 8) {
-        const y = baseY + Math.sin(x * freq + this.time * 2 + i) * baseAmp;
-        if (x === 0) this.ctx.moveTo(x, y);
-        else this.ctx.lineTo(x, y);
-      }
-      this.ctx.stroke();
-    }
-
-    // Particles
-    for (let p of this.particles) {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0) p.x = this.width;
-      if (p.x > this.width) p.x = 0;
-      if (p.y < 0) p.y = this.height;
-      if (p.y > this.height) p.y = 0;
-
+      this.ctx.save();
+      this.ctx.globalAlpha = p.alpha;
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+
+      // Luminous glow for larger or glowing particles
+      if (p.isGlowing) {
+        this.ctx.shadowBlur = 10;
+        this.ctx.shadowColor = '#00d2ff';
+      }
+
       this.ctx.fillStyle = p.color;
-      this.ctx.globalAlpha = 0.5;
       this.ctx.fill();
+      this.ctx.restore();
     }
-    this.ctx.globalAlpha = 1;
 
     requestAnimationFrame(() => this.render());
   }
@@ -325,7 +416,19 @@ const TRANSLATIONS = {
     mani_cta_bde: "YOUPULSE 2026 - 2027",
 
     footer_credits: "© 2026 YouPulse • The BDE of YouCode • Official Events & Activities Plan.",
-    footer_sync: "ALL SYSTEMS SYNCHRONIZED // YOUCODE YOUSSOUFIA"
+    footer_sync: "ALL SYSTEMS SYNCHRONIZED // YOUCODE YOUSSOUFIA",
+
+    // Lock screen translations
+    lock_badge_status: "RESTRICTED ACCESS // OFFICIAL EMBARGO",
+    lock_headline: `THE PROGRAMME IS CURRENTLY <br /><span class="gradient-blue">LOCKED</span>`,
+    lock_subtext: "The official YouPulse 2026 - 2027 roadmap is under embargo. It will unlock automatically when the countdown ends:",
+    lock_hamster_tag: "CONFIDENTIAL // RELEASE TOMORROW AT 14:00",
+    lock_btn_home: "Back to Home Page",
+    lock_system_tag: "BDE YOUPULSE SYNCHRONIZATION • AUTOMATIC LIVE UNLOCK WITHOUT REFRESH",
+    count_days: "Days",
+    count_hours: "Hours",
+    count_mins: "Minutes",
+    count_secs: "Seconds"
   },
 
   fr: {
@@ -477,7 +580,19 @@ const TRANSLATIONS = {
     mani_cta_bde: "YOUPULSE 2026 - 2027",
 
     footer_credits: "© 2026 YouPulse • Le BDE de YouCode • Plan d'Événements & Activités Officiel.",
-    footer_sync: "TOUS LES SYSTÈMES SYNCHRONISÉS // YOUCODE YOUSSOUFIA"
+    footer_sync: "TOUS LES SYSTÈMES SYNCHRONISÉS // YOUCODE YOUSSOUFIA",
+
+    // Lock screen translations
+    lock_badge_status: "ACCÈS VERROUILLÉ // EMBARGO EN COURS",
+    lock_headline: `LE PROGRAMME EST ACTUELLEMENT <br /><span class="gradient-blue">VERROUILLÉ</span>`,
+    lock_subtext: "La feuille de route officielle YouPulse 2026 - 2027 est sous embargo. Elle se déverrouillera automatiquement dès la fin du compte à rebours :",
+    lock_hamster_tag: "CONFIDENTIEL // GHDA M3A 14:00",
+    lock_btn_home: "Retourner à l'Accueil",
+    lock_system_tag: "SYNCHRONISATION BDE YOUPULSE • DÉVERROUILLAGE EN DIRECT SANS RECHARGEMENT",
+    count_days: "Jours",
+    count_hours: "Heures",
+    count_mins: "Minutes",
+    count_secs: "Secondes"
   }
 };
 
@@ -590,11 +705,106 @@ function initTrackFilter() {
   });
 }
 
-// --- 6. DOM Ready ---
+// --- 6. Programme Target Date & Realtime Lock Engine ---
+function getProgrammeTargetDate() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('test_sec')) {
+    const sec = parseInt(urlParams.get('test_sec'), 10) || 10;
+    const key = 'youpulse_test_target_sec_' + sec;
+    if (!sessionStorage.getItem(key)) {
+      sessionStorage.setItem(key, String(Date.now() + sec * 1000));
+    }
+    return new Date(parseInt(sessionStorage.getItem(key), 10));
+  }
+  if (urlParams.has('unlock')) {
+    return new Date(Date.now() - 5000);
+  }
+  if (urlParams.has('locked')) {
+    return new Date(Date.now() + 3600000);
+  }
+
+  // Official Launch Target: Friday 16 October 2026 at 14:00:00 (Ghda m3a 14:00)
+  return new Date(2026, 9, 16, 14, 0, 0);
+}
+
+function initProgrammeLockEngine(waveEngine) {
+  const lockScreen = document.getElementById('programme-lock-screen');
+  const mainContainer = document.querySelector('.programme-main-container');
+  const daysEl = document.getElementById('lock-count-days');
+  const hoursEl = document.getElementById('lock-count-hours');
+  const minsEl = document.getElementById('lock-count-mins');
+  const secsEl = document.getElementById('lock-count-secs');
+  const hamsterPic = document.getElementById('lock-bouncing-hamster');
+
+  if (!lockScreen) return;
+
+  let hasUnlocked = false;
+
+  if (hamsterPic) {
+    hamsterPic.addEventListener('click', (e) => {
+      sound.playHamsterSqueak();
+      if (waveEngine) waveEngine.emitSonar(e.clientX, e.clientY, 55);
+    });
+  }
+
+  function updateLockCountdown() {
+    const target = getProgrammeTargetDate();
+    const now = new Date();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      if (daysEl) daysEl.textContent = '00';
+      if (hoursEl) hoursEl.textContent = '00';
+      if (minsEl) minsEl.textContent = '00';
+      if (secsEl) secsEl.textContent = '00';
+
+      if (!hasUnlocked) {
+        hasUnlocked = true;
+        const container = lockScreen.querySelector('.lock-screen-container');
+        if (container) container.classList.add('unlocked-blast');
+        sound.playUnlockFanfare();
+        if (waveEngine) waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight * 0.35, 95);
+
+        setTimeout(() => {
+          document.documentElement.classList.remove('programme-locked-mode');
+          lockScreen.style.display = 'none';
+          if (mainContainer) {
+            mainContainer.classList.add('programme-unlocked-reveal');
+          }
+        }, 650);
+      } else {
+        document.documentElement.classList.remove('programme-locked-mode');
+        lockScreen.style.display = 'none';
+      }
+      return;
+    }
+
+    // diff > 0: Page stays locked
+    hasUnlocked = false;
+    document.documentElement.classList.add('programme-locked-mode');
+    lockScreen.style.display = 'block';
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+    if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+    if (minsEl) minsEl.textContent = String(minutes).padStart(2, '0');
+    if (secsEl) secsEl.textContent = String(seconds).padStart(2, '0');
+  }
+
+  updateLockCountdown();
+  setInterval(updateLockCountdown, 1000);
+}
+
+// --- 7. DOM Ready ---
 document.addEventListener('DOMContentLoaded', () => {
-  new SoundWaveEngine('soundwave-canvas');
+  const waveEngine = new SoundWaveEngine('soundwave-canvas');
   initLanguageSwitcher();
   initTrackFilter();
+  initProgrammeLockEngine(waveEngine);
 
   // Micro-hover sound for interactive cards
   document.querySelectorAll('.game-item-card, .catering-item-card, .comp-feature-card, .pipeline-step-card, .exp-card').forEach(card => {
@@ -603,3 +813,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+

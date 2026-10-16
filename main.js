@@ -107,6 +107,29 @@ class SoundSynth {
       osc.stop(now + 0.035);
     } catch (e)  { }
   }
+
+  // Celebratory cyber chime / unlock fanfare when timer hits 0
+  playUnlockFanfare() {
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      notes.forEach((freq, idx) => {
+        const now = this.ctx.currentTime + idx * 0.1;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.05, now + 0.35);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      });
+    } catch (e) {}
+  }
 }
 
 const sound = new SoundSynth();
@@ -421,6 +444,8 @@ const TRANSLATIONS = {
     welcome_btn_skip: "Later, explore the website",
     welcome_footer: "CONFIDENTIAL ACCESS · YOUCODE YOUSSOUFIA",
     hamster_embargo: "OFFICIAL RELEASE TOMORROW AT 14:00",
+    modal_btn_see_programme: "VIEW THE PROGRAMME PAGE",
+    modal_btn_locked_programme: "LOCKED // RELEASE AT 14:00",
     count_days: "Days",
     count_hours: "Hours",
     count_mins: "Minutes",
@@ -509,6 +534,8 @@ const TRANSLATIONS = {
     welcome_btn_skip: "Plus tard, explorer le site",
     welcome_footer: "ACCÈS CONFIDENTIEL · YOUCODE YOUSSOUFIA",
     hamster_embargo: "OUVERTURE OFFICIELLE DEMAIN À 14:00",
+    modal_btn_see_programme: "VOIR LA PAGE DU PROGRAMME",
+    modal_btn_locked_programme: "VERROUILLÉ // SORTIE À 14:00",
     count_days: "Jours",
     count_hours: "Heures",
     count_mins: "Minutes",
@@ -622,7 +649,7 @@ const MEMBERS_DATA = [
       en: 'Head of Media',
       fr: 'Responsable Média'
     },
-    photo: 'assets/images/hiba.jpg',
+    photo: 'assets/images/hiba.png',
     tagline: {
       en: 'Capturing campus energy, producing striking visuals, and spotlighting YouCode achievements.',
       fr: 'Capturer l’énergie du campus, produire des visuels percutants et valoriser les réussites de YouCode.'
@@ -839,19 +866,27 @@ function initMemberCardTilt() {
 
 // --- 6. Tomorrow 14:00 ("Ghda m3a 14:00") Countdown Engine ---
 function getProgrammeTargetDate() {
-  const now = new Date();
-
-  // Primary Target: Friday 16 October 2026 at 14:00:00 (Tomorrow 14:00)
-  if (now.getFullYear() === 2026 && now.getMonth() === 9) {
-    return new Date(2026, 9, 16, 14, 0, 0);
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('test_sec')) {
+    const sec = parseInt(urlParams.get('test_sec'), 10) || 10;
+    const key = 'youpulse_test_target_sec_' + sec;
+    if (!sessionStorage.getItem(key)) {
+      sessionStorage.setItem(key, String(Date.now() + sec * 1000));
+    }
+    return new Date(parseInt(sessionStorage.getItem(key), 10));
+  }
+  if (urlParams.has('unlock')) {
+    return new Date(Date.now() - 5000);
+  }
+  if (urlParams.has('locked')) {
+    return new Date(Date.now() + 3600000);
   }
 
-  // Universal dynamic fallback: tomorrow at 14:00:00
-  const target = new Date(now);
-  target.setDate(now.getDate() + 1);
-  target.setHours(14, 0, 0, 0);
-  return target;
+  // Official Launch Target: Friday 16 October 2026 at 14:00:00 (Ghda m3a 14:00)
+  return new Date(2026, 9, 16, 14, 0, 0);
 }
+
+let __hasCelebratedUnlock = false;
 
 function updateCountdown() {
   const target = getProgrammeTargetDate();
@@ -864,6 +899,8 @@ function updateCountdown() {
   const secsEl = document.getElementById('count-secs');
   const embargoEl = document.querySelector('.time-embargo-label');
   const statusPills = document.querySelectorAll('[data-i18n="btn_status_day"]');
+  const btnUnlockedProg = document.getElementById('btn-unlocked-programme');
+  const navProgLink = document.querySelector('.nav-link-programme');
 
   if (diff <= 0) {
     if (daysEl) daysEl.textContent = '00';
@@ -875,11 +912,54 @@ function updateCountdown() {
       embargoEl.textContent = currentLang === 'fr' 
         ? 'LE PROGRAMME EST MAINTENANT DISPONIBLE !' 
         : 'THE PROGRAMME IS NOW AVAILABLE!';
+      embargoEl.classList.add('embargo-unlocked');
     }
     statusPills.forEach(p => {
       p.textContent = currentLang === 'fr' ? 'DISPONIBLE' : 'NOW LIVE';
+      p.classList.add('pill-unlocked');
     });
+
+    if (btnUnlockedProg) {
+      btnUnlockedProg.classList.remove('is-locked-cta');
+      btnUnlockedProg.classList.add('is-unlocked-cta');
+      const textSpan = btnUnlockedProg.querySelector('[data-i18n="modal_btn_see_programme"]') || btnUnlockedProg.querySelector('span:not(.btn-laser-glow):not(.btn-laser-content)');
+      if (textSpan) {
+        textSpan.textContent = currentLang === 'fr' ? 'VOIR LA PAGE DU PROGRAMME' : 'VIEW THE PROGRAMME PAGE';
+      }
+    }
+
+    if (navProgLink) {
+      navProgLink.classList.remove('is-nav-locked');
+      navProgLink.classList.add('is-nav-unlocked');
+      navProgLink.setAttribute('title', currentLang === 'fr' ? 'Programme Déverrouillé' : 'Programme Unlocked');
+    }
+
+    if (!__hasCelebratedUnlock && window.__wasLockedState) {
+      __hasCelebratedUnlock = true;
+      sound.playUnlockFanfare();
+    }
+    window.__wasLockedState = false;
     return;
+  }
+
+  // diff > 0: Still locked
+  window.__wasLockedState = true;
+
+  if (btnUnlockedProg) {
+    btnUnlockedProg.classList.add('is-locked-cta');
+    btnUnlockedProg.classList.remove('is-unlocked-cta');
+    const textSpan = btnUnlockedProg.querySelector('[data-i18n="modal_btn_see_programme"]') || btnUnlockedProg.querySelector('span:not(.btn-laser-glow):not(.btn-laser-content)');
+    if (textSpan) {
+      textSpan.textContent = currentLang === 'fr' 
+        ? 'VERROUILLÉ // SORTIE À 14:00' 
+        : 'LOCKED // RELEASE AT 14:00';
+    }
+  }
+
+  if (navProgLink) {
+    navProgLink.classList.add('is-nav-locked');
+    navProgLink.classList.remove('is-nav-unlocked');
+    navProgLink.setAttribute('title', currentLang === 'fr' ? 'Programme Verrouillé jusqu\'à 14:00' : 'Programme Locked until 14:00');
   }
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -947,15 +1027,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnWelcomeClose = document.getElementById('welcome-close-btn');
 
   // When user clicks "VOIR LE PROGRAMME" in the first-visit popup:
-  // Transition directly into the bouncing hamster surprise!
   if (btnWelcomeView) {
     btnWelcomeView.addEventListener('click', () => {
-      closeWelcomeModal();
-      sessionStorage.setItem('youpulse_welcome_seen', 'true');
-      setTimeout(() => {
-        openHamsterModal();
-        waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight / 2, 55);
-      }, 180);
+      const target = getProgrammeTargetDate();
+      if (target - new Date() > 0) {
+        closeWelcomeModal();
+        sessionStorage.setItem('youpulse_welcome_seen', 'true');
+        setTimeout(() => {
+          openHamsterModal();
+          waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight / 2, 55);
+        }, 180);
+      } else {
+        // Unlocked! Navigate straight to programme
+        window.location.href = 'programme.html';
+      }
     });
   }
 
@@ -995,18 +1080,60 @@ document.addEventListener('DOMContentLoaded', () => {
   const iconCloseHamster = document.getElementById('modal-close-icon');
   const hamsterOverlay = document.getElementById('hamster-modal');
   const bouncingHamster = document.getElementById('bouncing-hamster-pic');
+  const btnUnlockedProg = document.getElementById('btn-unlocked-programme');
+  const navProgLink = document.querySelector('.nav-link-programme');
+
+  // Nav link "Programme" click guard
+  if (navProgLink) {
+    navProgLink.addEventListener('click', (e) => {
+      const target = getProgrammeTargetDate();
+      if (target - new Date() > 0) {
+        e.preventDefault();
+        openHamsterModal();
+        waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight * 0.3, 45);
+      }
+    });
+  }
+
+  // Modal Programme CTA button click guard
+  if (btnUnlockedProg) {
+    btnUnlockedProg.addEventListener('click', (e) => {
+      const target = getProgrammeTargetDate();
+      if (target - new Date() > 0) {
+        e.preventDefault();
+        sound.playHamsterSqueak();
+        waveEngine.emitSonar(e.clientX, e.clientY, 40);
+        const countdownGrid = document.querySelector('.countdown-digits-grid');
+        if (countdownGrid) {
+          countdownGrid.classList.remove('lock-shake');
+          void countdownGrid.offsetWidth;
+          countdownGrid.classList.add('lock-shake');
+        }
+      }
+    });
+  }
 
   if (btnSecretHero) {
     btnSecretHero.addEventListener('click', () => {
-      openHamsterModal();
-      waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight / 2, 45);
+      const target = getProgrammeTargetDate();
+      if (target - new Date() <= 0) {
+        window.location.href = 'programme.html';
+      } else {
+        openHamsterModal();
+        waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight / 2, 45);
+      }
     });
   }
 
   if (btnSecretHeader) {
     btnSecretHeader.addEventListener('click', () => {
-      openHamsterModal();
-      waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight * 0.3, 45);
+      const target = getProgrammeTargetDate();
+      if (target - new Date() <= 0) {
+        window.location.href = 'programme.html';
+      } else {
+        openHamsterModal();
+        waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight * 0.3, 45);
+      }
     });
   }
 
