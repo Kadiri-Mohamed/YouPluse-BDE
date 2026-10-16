@@ -41,7 +41,7 @@
           targetTime = Date.now() + 3600000;
         } else {
           // Official Launch Target: Friday 16 October 2026 at 14:00:00 (Ghda m3a 14:00)
-          targetTime = new Date(2026, 9, 16, 14, 0, 0).getTime();
+          targetTime = new Date(2026, 9, 16, 16, 0, 0).getTime();
         }
         if (targetTime - Date.now() > 0) {
           document.documentElement.classList.add('programme-locked-mode');
@@ -205,6 +205,109 @@
         </div>
 
       </div>
+    </div>
+
+    <!-- Floating Left Cyber Side-Spine Navigation (HUD Scroll Spy with Toggle Tab) -->
+    <div id="programme-left-spine-wrapper" class="programme-left-spine-wrapper">
+      
+      <!-- Sleek >> / << Cyber Toggle Tab Button -->
+      <button id="spine-toggle-btn" class="left-spine-toggle-tab" type="button" aria-expanded="false" aria-label="Afficher ou masquer les tracks" title="Tracks Navigator">
+        <span class="spine-toggle-beacon"></span>
+        <span class="spine-toggle-icon">
+          <!-- Chevron Open (>>) -->
+          <svg class="chevron-open-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="7 18 13 12 7 6"></polyline>
+            <polyline points="13 18 19 12 13 6"></polyline>
+          </svg>
+          <!-- Chevron Close (<<) -->
+          <svg class="chevron-close-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="11 18 5 12 11 6"></polyline>
+            <polyline points="17 18 11 12 17 6"></polyline>
+          </svg>
+        </span>
+        <span class="spine-toggle-txt" data-i18n="spine_toggle_tracks"></span>
+      </button>
+
+      <!-- The Side Navigation List -->
+      <nav id="programme-left-spine" class="programme-left-spine-nav" aria-label="Navigation des sections du programme">
+        <div class="left-spine-track-line">
+          <span class="left-spine-spark" aria-hidden="true"></span>
+        </div>
+
+        <div class="spine-dots-list">
+          
+          <!-- Section 1: Master Plan -->
+          <a href="#masterplan" class="spine-dot-item" data-section="masterplan" aria-label="Master Plan">
+            <div class="spine-dot-node">
+              <span class="spine-dot-halo" aria-hidden="true"></span>
+              <span class="spine-dot-circle">
+                <span class="spine-dot-core"></span>
+              </span>
+            </div>
+            <div class="spine-dot-label">
+              <span class="spine-dot-num">01</span>
+              <span class="spine-dot-text" data-i18n="nav_masterplan">Master Plan</span>
+            </div>
+          </a>
+
+          <!-- Section 2: Intégration -->
+          <a href="#integration" class="spine-dot-item" data-section="integration" aria-label="Intégration">
+            <div class="spine-dot-node">
+              <span class="spine-dot-halo" aria-hidden="true"></span>
+              <span class="spine-dot-circle">
+                <span class="spine-dot-core"></span>
+              </span>
+            </div>
+            <div class="spine-dot-label">
+              <span class="spine-dot-num">02</span>
+              <span class="spine-dot-text" data-i18n="nav_integration">Intégration</span>
+            </div>
+          </a>
+
+          <!-- Section 3: Compétitions -->
+          <a href="#competitions" class="spine-dot-item" data-section="competitions" aria-label="Compétitions">
+            <div class="spine-dot-node">
+              <span class="spine-dot-halo" aria-hidden="true"></span>
+              <span class="spine-dot-circle">
+                <span class="spine-dot-core"></span>
+              </span>
+            </div>
+            <div class="spine-dot-label">
+              <span class="spine-dot-num">03</span>
+              <span class="spine-dot-text" data-i18n="nav_competitions">Compétitions</span>
+            </div>
+          </a>
+
+          <!-- Section 4: Réseau Pro -->
+          <a href="#industry" class="spine-dot-item" data-section="industry" aria-label="Réseau Pro">
+            <div class="spine-dot-node">
+              <span class="spine-dot-halo" aria-hidden="true"></span>
+              <span class="spine-dot-circle">
+                <span class="spine-dot-core"></span>
+              </span>
+            </div>
+            <div class="spine-dot-label">
+              <span class="spine-dot-num">04</span>
+              <span class="spine-dot-text" data-i18n="nav_industry">Réseau Pro</span>
+            </div>
+          </a>
+
+          <!-- Section 5: Culture & Fun -->
+          <a href="#culture" class="spine-dot-item" data-section="culture" aria-label="Bien-être & Fun">
+            <div class="spine-dot-node">
+              <span class="spine-dot-halo" aria-hidden="true"></span>
+              <span class="spine-dot-circle">
+                <span class="spine-dot-core"></span>
+              </span>
+            </div>
+            <div class="spine-dot-label">
+              <span class="spine-dot-num">05</span>
+              <span class="spine-dot-text" data-i18n="nav_culture">Bien-être & Fun</span>
+            </div>
+          </a>
+
+        </div>
+      </nav>
     </div>
 
     <!-- Main Content -->

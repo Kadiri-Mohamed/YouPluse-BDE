@@ -3363,3 +3363,381 @@ html.programme-locked-mode .programme-lock-screen {
   }
 }
 
+/* ==========================================================================
+   PROGRAMME FLOATING LEFT SIDE-SPINE (COLLAPSIBLE DRAWER WITH >> TOGGLE)
+   ========================================================================== */
+.programme-left-spine-wrapper {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+/* Hidden while lock screen is active */
+html.programme-locked-mode .programme-left-spine-wrapper {
+  display: none !important;
+}
+
+/* The >> / << Cybernetic Toggle Tab Button */
+.left-spine-toggle-tab {
+  pointer-events: auto;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.95rem 0.65rem 0.85rem;
+  background: rgba(6, 10, 18, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(0, 210, 255, 0.42);
+  border-left: none;
+  border-radius: 0 16px 16px 0;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 102, 255, 0.25);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 99;
+}
+
+.left-spine-toggle-tab:hover {
+  background: rgba(10, 18, 36, 0.98);
+  border-color: var(--blue-glow);
+  box-shadow: 6px 0 30px rgba(0, 0, 0, 0.9), 0 0 28px rgba(0, 210, 255, 0.5);
+  padding-right: 1.15rem;
+}
+
+.spine-toggle-beacon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+  animation: beaconPulse 2.2s infinite ease-in-out;
+}
+
+@keyframes beaconPulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.75; }
+  50% { transform: scale(1.35); opacity: 1; }
+}
+
+.spine-toggle-icon {
+  display: flex;
+  align-items: center;
+  color: var(--blue-glow);
+  transition: transform 0.3s ease;
+}
+
+.chevron-close-svg {
+  display: none;
+}
+
+.chevron-open-svg {
+  display: block;
+}
+
+.spine-toggle-txt {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* When expanded: morph icon to << and position smoothly beside spine */
+body.left-spine-open .chevron-open-svg {
+  display: none;
+}
+body.left-spine-open .chevron-close-svg {
+  display: block;
+  color: #38bdf8;
+}
+
+body.left-spine-open .left-spine-toggle-tab {
+  top: -48px;
+  left: 18px;
+  transform: translateY(0);
+  border-radius: 999px;
+  border: 1.5px solid rgba(0, 210, 255, 0.5);
+  padding: 0.42rem 0.85rem;
+  background: rgba(6, 10, 18, 0.96);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.85), 0 0 18px rgba(0, 210, 255, 0.35);
+}
+
+body.left-spine-open .left-spine-toggle-tab:hover {
+  background: rgba(12, 22, 42, 0.98);
+  border-color: var(--blue-glow);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 210, 255, 0.5);
+  padding-right: 0.85rem;
+}
+
+/* Side navigation container - COLLAPSED BY DEFAULT */
+.programme-left-spine-nav {
+  position: relative;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-120%);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* When expanded (open state) */
+body.left-spine-open .programme-left-spine-nav {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+/* PUSH THE MAIN CONTENT CONTAINER TO THE RIGHT WHEN SPINDLE IS OPEN! */
+/* "dfe3 dok section ljenb chwiya bach ib9a wa7ed espace o matwelich ketba fo9 ketba" */
+.programme-main-container {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), max-width 0.45s ease, margin 0.45s ease;
+}
+
+body.left-spine-open .programme-main-container {
+  transform: translateX(180px);
+  max-width: min(1160px, calc(100vw - 360px));
+}
+
+@media (max-width: 1440px) {
+  body.left-spine-open .programme-main-container {
+    transform: translateX(160px);
+    max-width: min(1080px, calc(100vw - 340px));
+  }
+}
+
+@media (max-width: 1240px) {
+  body.left-spine-open .programme-main-container {
+    transform: translateX(140px);
+    max-width: min(980px, calc(100vw - 310px));
+  }
+}
+
+@media (max-width: 1040px) {
+  body.left-spine-open .programme-main-container {
+    transform: translateX(0);
+    max-width: 100%;
+  }
+  body.left-spine-open .left-spine-toggle-tab {
+    left: 175px;
+  }
+  body.left-spine-open .programme-left-spine-nav {
+    background: rgba(6, 10, 18, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    border-radius: 20px;
+    padding: 1.25rem 1rem 1.25rem 0.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 102, 255, 0.3);
+  }
+}
+
+/* Central glowing connecting vertical line */
+.left-spine-track-line {
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 17px;
+  width: 2px;
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    rgba(0, 210, 255, 0.3) 15%, 
+    var(--blue-glow) 50%, 
+    var(--blue-primary) 85%, 
+    transparent 100%
+  );
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.5), 0 0 22px rgba(0, 102, 255, 0.3);
+  z-index: 1;
+}
+
+/* Energy traveling spark like pillars spine */
+.left-spine-spark {
+  position: absolute;
+  left: 50%;
+  width: 4px;
+  height: 28px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffffff, var(--blue-glow));
+  box-shadow: 0 0 10px #ffffff, 0 0 22px var(--blue-glow), 0 0 35px var(--blue-primary);
+  animation: leftSpineSparkTravel 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes leftSpineSparkTravel {
+  0% { top: 0%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 92%; opacity: 0; }
+}
+
+.spine-dots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Individual node link item */
+.spine-dot-item {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  padding: 4px 0;
+}
+
+/* Circular node */
+.spine-dot-node {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.spine-dot-halo {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.spine-dot-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #070a14;
+  border: 2px solid rgba(0, 210, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.85), inset 0 0 10px rgba(0, 102, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.spine-dot-core {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0, 210, 255, 0.5);
+  box-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
+  transition: all 0.35s ease;
+}
+
+/* Hover state on circle */
+.spine-dot-item:hover .spine-dot-circle {
+  border-color: var(--blue-glow);
+  box-shadow: 0 0 22px rgba(0, 210, 255, 0.7), inset 0 0 12px rgba(0, 210, 255, 0.35);
+  transform: scale(1.14);
+}
+
+.spine-dot-item:hover .spine-dot-core {
+  background: #ffffff;
+  box-shadow: 0 0 14px #ffffff, 0 0 22px var(--blue-glow);
+  transform: scale(1.25);
+}
+
+/* Active Section State (Glowing blue circle with vibrant light!) */
+.spine-dot-item.is-active .spine-dot-circle {
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.6), rgba(0, 210, 255, 0.35));
+  border-color: #00d2ff;
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.85), 0 0 45px rgba(0, 102, 255, 0.65), inset 0 0 15px rgba(255, 255, 255, 0.5);
+  transform: scale(1.18);
+}
+
+.spine-dot-item.is-active .spine-dot-core {
+  background: #ffffff;
+  box-shadow: 0 0 12px #ffffff, 0 0 25px var(--blue-glow);
+  transform: scale(1.3);
+}
+
+.spine-dot-item.is-active .spine-dot-halo {
+  border-color: rgba(0, 210, 255, 0.6);
+  animation: leftSpineHaloPulse 2.4s infinite ease-out;
+}
+
+@keyframes leftSpineHaloPulse {
+  0% { transform: scale(0.85); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* The label badge on the right of the node */
+.spine-dot-label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(8, 12, 22, 0.88);
+  border: 1px solid rgba(0, 210, 255, 0.28);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.38rem 0.95rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 15px rgba(0, 102, 255, 0.18);
+  white-space: nowrap;
+  opacity: 0.85;
+  transform: translateX(-4px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.spine-dot-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--blue-cyan);
+}
+
+.spine-dot-text {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+/* Hover and active label enhancements */
+.spine-dot-item:hover .spine-dot-label {
+  opacity: 1;
+  transform: translateX(0);
+  border-color: var(--blue-glow);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 210, 255, 0.35);
+}
+
+.spine-dot-item.is-active .spine-dot-label {
+  opacity: 1;
+  transform: translateX(0);
+  background: rgba(10, 16, 32, 0.95);
+  border-color: #00d2ff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.85), 0 0 24px rgba(0, 210, 255, 0.45);
+}
+
+.spine-dot-item.is-active .spine-dot-num {
+  color: #38bdf8;
+}
+
+.spine-dot-item.is-active .spine-dot-text {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+}
+
+

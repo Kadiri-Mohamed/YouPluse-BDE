@@ -883,7 +883,7 @@ function getProgrammeTargetDate() {
   }
 
   // Official Launch Target: Friday 16 October 2026 at 14:00:00 (Ghda m3a 14:00)
-  return new Date(2026, 9, 16, 14, 0, 0);
+  return new Date(2026, 9, 16, 16, 0, 0);
 }
 
 let __hasCelebratedUnlock = false;

@@ -96,8 +96,15 @@ const sound = new SoundSynth();
 class SoundWaveEngine {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
+    this.sonars = [];
+    this.particles = [];
+    this.time = 0;
+    this.width = window.innerWidth || 1200;
+    this.height = window.innerHeight || 800;
+
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext('2d');
+    if (!this.ctx) return;
     this.resize();
 
     this.mouse = {
@@ -107,9 +114,6 @@ class SoundWaveEngine {
       active: false
     };
 
-    this.sonars = [];
-    this.particles = [];
-    this.time = 0;
     this.waveLayers = 8;
     this.eqBars = 40;
 
@@ -190,11 +194,49 @@ class SoundWaveEngine {
     window.addEventListener('mouseleave', () => {
       this.mouse.active = false;
     });
+
+    window.addEventListener('click', (e) => {
+      this.emitSonar(e.clientX, e.clientY, 35);
+    });
+  }
+
+  emitSonar(x, y, power = 25) {
+    if (!this.sonars) this.sonars = [];
+    this.sonars.push({
+      x,
+      y,
+      radius: 4,
+      maxRadius: Math.min(this.width, this.height) * 0.5,
+      alpha: 0.85,
+      speed: 6 + power * 0.18
+    });
   }
 
   render() {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.time += 0.015;
+
+    // 0. Sonar Wave Rings
+    if (this.sonars) {
+      for (let i = this.sonars.length - 1; i >= 0; i--) {
+        const s = this.sonars[i];
+        s.radius += s.speed;
+        s.alpha = Math.max(0, 1 - s.radius / s.maxRadius);
+
+        if (s.alpha <= 0) {
+          this.sonars.splice(i, 1);
+          continue;
+        }
+
+        this.ctx.save();
+        this.ctx.beginPath();
+        this.ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        this.ctx.strokeStyle = `rgba(0, 210, 255, ${s.alpha * 0.45})`;
+        this.ctx.lineWidth = 1.5;
+        this.ctx.stroke();
+        this.ctx.restore();
+      }
+    }
 
     // 1. Faint cosmic constellation links between nearby floating stars
     const len = this.particles.length;
@@ -668,39 +710,67 @@ function initLanguageSwitcher() {
   setLanguage(currentLang, false);
 }
 
-// --- 5. Interactive Track Filter Bar ---
-function initTrackFilter() {
+// --- 5. Interactive Track Filter & Side-Spine Synchronizer ---
+let currentTrackFilter = 'all';
+
+function applyTrackFilter(targetFilter, shouldScroll = true, playBlip = false) {
+  currentTrackFilter = targetFilter;
   const filterButtons = document.querySelectorAll('.filter-pill-btn');
   const sections = document.querySelectorAll('.programme-track-section');
+  const dotItems = document.querySelectorAll('.programme-left-spine-nav .spine-dot-item');
 
+  if (playBlip) {
+    sound.playHoverBlip(680);
+  }
+
+  // Update top filter pills active state
+  filterButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-filter') === targetFilter);
+  });
+
+  // Update left spine dots active state
+  dotItems.forEach(dot => {
+    const isTarget = dot.getAttribute('data-section') === targetFilter;
+    dot.classList.toggle('is-active', isTarget);
+  });
+
+  // Filter sections display
+  if (targetFilter === 'all') {
+    sections.forEach(sec => {
+      sec.style.display = 'block';
+    });
+  } else {
+    sections.forEach(sec => {
+      const secCategory = sec.getAttribute('data-category');
+      sec.style.display = (secCategory === targetFilter) ? 'block' : 'none';
+    });
+  }
+
+  // Smooth scroll to the target section
+  if (shouldScroll) {
+    const targetEl = (targetFilter === 'all')
+      ? document.querySelector('.programme-track-section')
+      : document.querySelector(`.programme-track-section[data-category="${targetFilter}"]`);
+
+    if (targetEl) {
+      const headerOffset = 95;
+      const elementPos = targetEl.getBoundingClientRect().top;
+      const offsetPos = elementPos + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPos,
+        behavior: 'smooth'
+      });
+    }
+  }
+}
+
+function initTrackFilter() {
+  const filterButtons = document.querySelectorAll('.filter-pill-btn');
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      sound.playHoverBlip(650);
       const targetFilter = btn.getAttribute('data-filter');
-
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      if (targetFilter === 'all') {
-        sections.forEach(sec => {
-          sec.style.display = 'block';
-        });
-      } else {
-        sections.forEach(sec => {
-          const secCategory = sec.getAttribute('data-category');
-          if (secCategory === targetFilter) {
-            sec.style.display = 'block';
-          } else {
-            sec.style.display = 'none';
-          }
-        });
-
-        // Smooth scroll to first visible section
-        const firstVisible = document.querySelector(`.programme-track-section[data-category="${targetFilter}"]`);
-        if (firstVisible) {
-          firstVisible.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
+      applyTrackFilter(targetFilter, true, true);
     });
   });
 }
@@ -724,7 +794,7 @@ function getProgrammeTargetDate() {
   }
 
   // Official Launch Target: Friday 16 October 2026 at 14:00:00 (Ghda m3a 14:00)
-  return new Date(2026, 9, 16, 14, 0, 0);
+  return new Date(2026, 9, 16, 16, 0, 0);
 }
 
 function initProgrammeLockEngine(waveEngine) {
@@ -758,28 +828,22 @@ function initProgrammeLockEngine(waveEngine) {
       if (minsEl) minsEl.textContent = '00';
       if (secsEl) secsEl.textContent = '00';
 
-      if (!hasUnlocked) {
+      document.documentElement.classList.remove('programme-locked-mode');
+      lockScreen.style.display = 'none';
+
+      if (!hasUnlocked && window.__wasLockedByCountdown) {
         hasUnlocked = true;
-        const container = lockScreen.querySelector('.lock-screen-container');
-        if (container) container.classList.add('unlocked-blast');
         sound.playUnlockFanfare();
         if (waveEngine) waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight * 0.35, 95);
-
-        setTimeout(() => {
-          document.documentElement.classList.remove('programme-locked-mode');
-          lockScreen.style.display = 'none';
-          if (mainContainer) {
-            mainContainer.classList.add('programme-unlocked-reveal');
-          }
-        }, 650);
-      } else {
-        document.documentElement.classList.remove('programme-locked-mode');
-        lockScreen.style.display = 'none';
+        if (mainContainer) {
+          mainContainer.classList.add('programme-unlocked-reveal');
+        }
       }
       return;
     }
 
     // diff > 0: Page stays locked
+    window.__wasLockedByCountdown = true;
     hasUnlocked = false;
     document.documentElement.classList.add('programme-locked-mode');
     lockScreen.style.display = 'block';
@@ -799,12 +863,131 @@ function initProgrammeLockEngine(waveEngine) {
   setInterval(updateLockCountdown, 1000);
 }
 
-// --- 7. DOM Ready ---
+// --- 7. Programme Floating Left-Spine Navigator (Filter & Scroll Spy) ---
+function initProgrammeLeftSpine(waveEngine) {
+  const spineNav = document.getElementById('programme-left-spine');
+  const toggleBtn = document.getElementById('spine-toggle-btn');
+  const spineWrapper = document.getElementById('programme-left-spine-wrapper');
+  if (!spineNav) return;
+
+  const dotItems = spineNav.querySelectorAll('.spine-dot-item');
+  const sectionIds = ['masterplan', 'integration', 'competitions', 'industry', 'culture'];
+  let isThrottled = false;
+
+  // Toggle drawer open/close
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = document.body.classList.toggle('left-spine-open');
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      sound.playHoverBlip(isOpen ? 840 : 540);
+      if (waveEngine && typeof waveEngine.emitSonar === 'function') {
+        waveEngine.emitSonar(isOpen ? 220 : 35, window.innerHeight / 2, 45);
+      }
+    });
+  }
+
+  // Close when clicking outside of spine wrapper
+  document.addEventListener('click', (e) => {
+    if (document.body.classList.contains('left-spine-open')) {
+      if (spineWrapper && !spineWrapper.contains(e.target)) {
+        document.body.classList.remove('left-spine-open');
+        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('left-spine-open')) {
+      document.body.classList.remove('left-spine-open');
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  function updateSpineScrollState() {
+    // Show spine when scrolled down past hero (> 180px)
+    if (window.scrollY > 180) {
+      spineNav.classList.add('is-visible');
+    } else {
+      spineNav.classList.remove('is-visible');
+    }
+
+    // When in "all" tracks mode, track active section dynamically on scroll
+    if (currentTrackFilter === 'all') {
+      const scrollMiddle = window.scrollY + window.innerHeight * 0.38;
+      let currentActiveId = null;
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const secId = sectionIds[i];
+        const secEl = document.getElementById(secId);
+        if (secEl && secEl.style.display !== 'none') {
+          const top = secEl.offsetTop;
+          if (scrollMiddle >= top - 80) {
+            currentActiveId = secId;
+            break;
+          }
+        }
+      }
+
+      if (!currentActiveId && window.scrollY > 180) {
+        for (const secId of sectionIds) {
+          const secEl = document.getElementById(secId);
+          if (secEl && secEl.style.display !== 'none') {
+            currentActiveId = secId;
+            break;
+          }
+        }
+      }
+
+      dotItems.forEach(item => {
+        const itemSec = item.getAttribute('data-section');
+        item.classList.toggle('is-active', itemSec === currentActiveId);
+      });
+    }
+  }
+
+  // Left spine clicks behave exactly like top filter buttons (filtering to that track)
+  dotItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const secId = item.getAttribute('data-section');
+      
+      // Filter directly to that track section!
+      applyTrackFilter(secId, true, true);
+
+      if (waveEngine && typeof waveEngine.emitSonar === 'function') {
+        waveEngine.emitSonar(45, window.innerHeight / 2, 45);
+      }
+    });
+
+    item.addEventListener('mouseenter', () => {
+      sound.playHoverBlip(820);
+    });
+  });
+
+  // Throttled scroll listener
+  window.addEventListener('scroll', () => {
+    if (!isThrottled) {
+      window.requestAnimationFrame(() => {
+        updateSpineScrollState();
+        isThrottled = false;
+      });
+      isThrottled = true;
+    }
+  }, { passive: true });
+
+  // Initial check
+  updateSpineScrollState();
+}
+
+// --- 8. DOM Ready ---
 document.addEventListener('DOMContentLoaded', () => {
   const waveEngine = new SoundWaveEngine('soundwave-canvas');
   initLanguageSwitcher();
   initTrackFilter();
   initProgrammeLockEngine(waveEngine);
+  initProgrammeLeftSpine(waveEngine);
 
   // Micro-hover sound for interactive cards
   document.querySelectorAll('.game-item-card, .catering-item-card, .comp-feature-card, .pipeline-step-card, .exp-card').forEach(card => {
@@ -813,4 +996,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
 
