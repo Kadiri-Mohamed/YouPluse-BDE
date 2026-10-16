@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouPulse // Programme Officiel 2026 - 2027</title>
+  
+  <meta name="description" content="YouPulse - Programme Annuel d'Événements et d'Activités. Hackathons, intégration, tournois et vie étudiante à YouCode." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%230066ff%22/><path d=%22M20 50h18l7-20 10 40 7-20h18%22 stroke=%22%23fff%22 stroke-width=%228%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
+
+  <!-- Google Fonts: Syne, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="programme-page-body">
+
+  <!-- Background Sound Waves Canvas (Audio-reactive) -->
+  <div class="audio-canvas-container" aria-hidden="true">
+    <canvas id="soundwave-canvas"></canvas>
+  </div>
+  <div class="audio-grid-overlay" aria-hidden="true"></div>
+  <div class="ambient-vignette" aria-hidden="true"></div>
+
+  <!-- App Wrapper -->
+  <div class="app-wrapper">
+
+    <!-- Header Navigation -->
+    <header class="site-header">
+      <div class="header-container">
+        
+        <!-- Official YouPulse Logo with link to Home -->
+        <a href="index.html" class="header-brand" aria-label="YouPulse Home">
+          <img src="assets/images/logo_dark.png" alt="YouPulse BDE YouCode" class="header-logo-img" />
+          <div class="eq-bars-wrapper" aria-hidden="true" title="Audio Spectrum Active">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </div>
+        </a>
+
+        <!-- Programme Nav Links -->
+        <nav class="header-nav">
+          <a href="#masterplan" class="nav-link" data-i18n="nav_masterplan">Master Plan</a>
+          <a href="#integration" class="nav-link" data-i18n="nav_integration">Intégration</a>
+          <a href="#competitions" class="nav-link" data-i18n="nav_competitions">Compétitions</a>
+          <a href="#industry" class="nav-link" data-i18n="nav_industry">Réseau Pro</a>
+          <a href="#culture" class="nav-link" data-i18n="nav_culture">Bien-être & Fun</a>
+        </nav>
+
+        <!-- Header Actions: Language Switcher + Return Button -->
+        <div class="header-actions">
+          
+          <!-- Futuristic Cybernetic Language Toggle Button (ENG <-> FR) -->
+          <button id="lang-switch-btn" class="lang-switch-btn" type="button" data-current-lang="fr" aria-label="Changer la langue / Switch language" title="Changer la langue / Switch language">
+            <span class="lang-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </span>
+            <span class="lang-pill-track">
+              <span class="lang-badge lang-en" data-lang="en">EN</span>
+              <span class="lang-badge lang-fr active" data-lang="fr">FR</span>
+              <span class="lang-sliding-indicator" aria-hidden="true"></span>
+            </span>
+          </button>
+
+          <!-- Back to Homepage Link Button -->
+          <a href="index.html" class="header-cta-secret btn-return-home" aria-label="Retour à la page principale">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span data-i18n="nav_home">Retour à l'Accueil</span>
+          </a>
+
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="programme-main-container">
+
+      <!-- Hero Header Section -->
+      <section class="hero-wrap programme-hero">
+        
+        <div class="hero-campus-pill">
+          <span class="status-live-dot"></span>
+          <span data-i18n="hero_badge">PROGRAMME OFFICIEL 2026 - 2027 // LE POULS DE YOUCODE</span>
+        </div>
+
+        <h1 class="hero-punchline" data-i18n-html="hero_title">
+          ÉVÉNEMENTS & ACTIVITÉS <br />
+          <span class="gradient-blue">LE MASTER PLAN</span>
+        </h1>
+
+        <p class="hero-subtext" data-i18n="hero_desc">
+          La feuille de route complète de YouPulse. Rassembler rituels d'intégration, hackathons nationaux avec 1337 et l'ESAFE, connexions startups et bien-être étudiant.
+        </p>
+
+        <!-- Cyber Metrics HUD -->
+        <div class="programme-metrics-grid">
+          <div class="metric-hud-card">
+            <span class="metric-hud-num" data-i18n="stat_events_num">12+</span>
+            <span class="metric-hud-lbl" data-i18n="stat_events_lbl">Événements & Défis Officiels</span>
+          </div>
+          <div class="metric-hud-card">
+            <span class="metric-hud-num" data-i18n="stat_hackathons_num">02</span>
+            <span class="metric-hud-lbl" data-i18n="stat_hackathons_lbl">Hackathons Nationaux</span>
+          </div>
+          <div class="metric-hud-card">
+            <span class="metric-hud-num highlight-alliance" data-i18n="stat_alliances_num">1337 & ESAFE</span>
+            <span class="metric-hud-lbl" data-i18n="stat_alliances_lbl">Partenariats Nationaux</span>
+          </div>
+          <div class="metric-hud-card">
+            <span class="metric-hud-num" data-i18n="stat_spirit_num">100%</span>
+            <span class="metric-hud-lbl" data-i18n="stat_spirit_lbl">Expérience 100% Étudiante</span>
+          </div>
+        </div>
+
+        <!-- Interactive Track Filter Bar -->
+        <div class="programme-filter-bar">
+          <button class="filter-pill-btn active" data-filter="all" type="button" data-i18n="filter_all">Tout le Programme</button>
+          <button class="filter-pill-btn" data-filter="masterplan" type="button" data-i18n="filter_masterplan">Master Plan</button>
+          <button class="filter-pill-btn" data-filter="integration" type="button" data-i18n="filter_integration">Intégration</button>
+          <button class="filter-pill-btn" data-filter="competitions" type="button" data-i18n="filter_competitions">Compétitions</button>
+          <button class="filter-pill-btn" data-filter="industry" type="button" data-i18n="filter_industry">Réseau Entreprises</button>
+          <button class="filter-pill-btn" data-filter="culture" type="button" data-i18n="filter_culture">Culture & Fun</button>
+        </div>
+
+      </section>
+
+      <!-- Section 1: The Master Plan Matrix (Slide 12) -->
+      <section id="masterplan" class="programme-track-section" data-category="masterplan">
+        <div class="section-head">
+          <span class="section-tag" data-i18n="mp_tag">VISION ANNUELLE</span>
+          <h2 class="section-heading" data-i18n-html="mp_heading">LE MASTER <span>PLAN</span></h2>
+          <p class="section-sub" data-i18n="mp_sub">
+            Calendrier consolidé et statuts de déploiement de toutes les opérations majeures 2026 - 2027.
+          </p>
+        </div>
+
+        <div class="masterplan-table-wrapper">
+          <table class="masterplan-table">
+            <thead>
+              <tr>
+                <th data-i18n="th_category">Catégorie</th>
+                <th data-i18n="th_events">Événements Phares</th>
+                <th data-i18n="th_status">Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-category">
+                  <div class="category-icon-cell">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>Integration</span>
+                  </div>
+                </td>
+                <td class="td-events">Integration Day, Collective Portrait</td>
+                <td class="td-status">
+                  <span class="status-tag status-confirmed">
+                    <span class="tag-status-dot"></span>
+                    <span data-i18n="status_confirmed">Confirmé</span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="td-category">
+                  <div class="category-icon-cell">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    <span>Competitions</span>
+                  </div>
+                </td>
+                <td class="td-events">Web Hackathon: Smart Agri, National Game Jam</td>
+                <td class="td-status">
+                  <span class="status-tag status-confirmed">
+                    <span class="tag-status-dot"></span>
+                    <span data-i18n="status_confirmed">Confirmé</span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="td-category">
+                  <div class="category-icon-cell">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    <span>Professional</span>
+                  </div>
+                </td>
+                <td class="td-events">Startup Connect: The Pitch, The Build, The Handover</td>
+                <td class="td-status">
+                  <span class="status-tag status-scheduled">
+                    <span class="tag-status-dot"></span>
+                    <span data-i18n="status_scheduled">Planifié</span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="td-category">
+                  <div class="category-icon-cell">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                    <span>Culture &amp; Fun</span>
+                  </div>
+                </td>
+                <td class="td-events">Moroccan Traditional Night, Women's Day, Pijama Night, Unprofessional Day</td>
+                <td class="td-status">
+                  <span class="status-tag status-ongoing">
+                    <span class="tag-status-dot"></span>
+                    <span data-i18n="status_ongoing">En cours (+ Plus)</span>
+                  </span>
+                </td>
+              </tr>
+              <tr class="tr-secret-highlight">
+                <td class="td-category">
+                  <div class="category-icon-cell">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <span>Micro-Events</span>
+                  </div>
+                </td>
+                <td class="td-events">Smaller club workshops &amp; local flash challenges</td>
+                <td class="td-status">
+                  <span class="status-tag status-secret">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <span data-i18n="status_secret">Top Secret</span>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 2: Integration Track - Halloween Special (Slides 3, 4, 5) -->
+      <section id="integration" class="programme-track-section" data-category="integration">
+        
+        <div class="section-head">
+          <span class="section-tag section-tag-halloween" data-i18n="int_tag">31 OCTOBRE // RITUEL D'INTÉGRATION</span>
+          <h2 class="section-heading" data-i18n-html="int_heading">JOURNÉE D'INTÉGRATION <span>HALLOWEEN</span></h2>
+          <p class="section-sub" data-i18n="int_sub">
+            Expériences partagées, défis collectifs riches en adrénaline, traiteur effrayant et œuvre artistique collective.
+          </p>
+        </div>
+
+        <!-- The 7 Themed Games Grid (Slide 3) -->
+        <div class="programme-sub-block">
+          <div class="block-header-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+            <span data-i18n="games_title">Jeux Thématiques</span>
+          </div>
+
+          <div class="themed-games-grid">
+            
+            <div class="game-item-card">
+              <div class="game-num-badge">01</div>
+              <h3 class="game-name" data-i18n="g1_title">Zombie Tag</h3>
+              <p class="game-desc" data-i18n="g1_desc">Survivez à la horde grâce à votre agilité et coordination.</p>
+            </div>
+
+            <div class="game-item-card">
+              <div class="game-num-badge">02</div>
+              <h3 class="game-name" data-i18n="g2_title">Mummy Relay</h3>
+              <p class="game-desc" data-i18n="g2_desc">Sprint effréné emmailloté dans du papier sur tout le campus.</p>
+            </div>
+
+            <div class="game-item-card">
+              <div class="game-num-badge">03</div>
+              <h3 class="game-name" data-i18n="g3_title">Toxic Waste</h3>
+              <p class="game-desc" data-i18n="g3_desc">Transport sous haute tension d'un container avec élastiques.</p>
+            </div>
+
+            <div class="game-item-card">
+              <div class="game-num-badge">04</div>
+              <h3 class="game-name" data-i18n="g4_title">Blind Box</h3>
+              <p class="game-desc" data-i18n="g4_desc">Identification tactile et sensorielle d'objets à l'aveugle.</p>
+            </div>
+
+            <div class="game-item-card">
+              <div class="game-num-badge">05</div>
+              <h3 class="game-name" data-i18n="g5_title">Blood Bank</h3>
+              <p class="game-desc" data-i18n="g5_desc">Course d'endurance de transfert d'eau à l'éponge.</p>
+            </div>
+
+            <div class="game-item-card">
+              <div class="game-num-badge">06</div>
+              <h3 class="game-name" data-i18n="g6_title">Vampire's Shadow</h3>
+              <p class="game-desc" data-i18n="g6_desc">Le terrifiant Un, Deux, Trois, Soleil version nocturne.</p>
+            </div>
+
+            <div class="game-item-card game-item-card-highlight">
+              <div class="game-num-badge">07</div>
+              <h3 class="game-name" data-i18n="g7_title">Werewolf Village</h3>
+              <p class="game-desc" data-i18n="g7_desc">Partie de Loup-Garou immersive au cœur du village hanté.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Catering & Game Format Split (Slide 4) -->
+        <div class="catering-format-container">
+          
+          <!-- Halloween Catering -->
+          <div class="catering-box">
+            <div class="block-header-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+              <span data-i18n="catering_title">Traiteur Halloween</span>
+            </div>
+
+            <div class="catering-cards-grid">
+              <div class="catering-item-card">
+                <span class="catering-dish-name" data-i18n="c1_title">Pâtes Sanglantes</span>
+                <span class="catering-dish-desc" data-i18n="c1_desc">Sauce tomate et faux yeux pour une dégustation immersive.</span>
+              </div>
+              <div class="catering-item-card">
+                <span class="catering-dish-name" data-i18n="c2_title">Merguez Momie</span>
+                <span class="catering-dish-desc" data-i18n="c2_desc">Saucisses croustillantes enroulées de pâte dorée.</span>
+              </div>
+              <div class="catering-item-card">
+                <span class="catering-dish-name" data-i18n="c3_title">Potion de Sorcière</span>
+                <span class="catering-dish-desc" data-i18n="c3_desc">Soupe de potiron onctueuse servie au chaudron.</span>
+              </div>
+              <div class="catering-item-card">
+                <span class="catering-dish-name" data-i18n="c4_title">Coupes du Cimetière</span>
+                <span class="catering-dish-desc" data-i18n="c4_desc">Mousse chocolat et crumble façon terre meuble.</span>
+              </div>
+              <div class="catering-item-card">
+                <span class="catering-dish-name" data-i18n="c5_title">Lait Sanglant ou Mojitos</span>
+                <span class="catering-dish-desc" data-i18n="c5_desc">Choisissez votre cocktail signature rafraîchissant.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Game Format Rules -->
+          <div class="format-box">
+            <div class="block-header-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span data-i18n="format_title">Format des Épreuves</span>
+            </div>
+
+            <div class="format-cards-stack">
+              <div class="format-rule-card">
+                <div class="format-rule-indicator"></div>
+                <h4 class="format-rule-title" data-i18n="format_modes_title">Deux Modes</h4>
+                <p class="format-rule-desc" data-i18n="format_modes_desc">Épreuves en escouades | Défis solo.</p>
+              </div>
+
+              <div class="format-rule-card">
+                <div class="format-rule-indicator"></div>
+                <h4 class="format-rule-title" data-i18n="format_teams_title">Équipes Équilibrées</h4>
+                <p class="format-rule-desc" data-i18n="format_teams_desc">Un algorithme équilibre harmonieusement les étudiants entre factions.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Collective Portrait Highlight (Slide 5) -->
+        <div class="collective-portrait-card">
+          <div class="portrait-glow" aria-hidden="true"></div>
+          <div class="portrait-content">
+            <span class="portrait-tag-badge" data-i18n="portrait_tag">ACTIVITÉ D'INTÉGRATION</span>
+            <h3 class="portrait-title" data-i18n-html="portrait_title">PORTRAIT <span>COLLECTIF</span></h3>
+            <p class="portrait-desc" data-i18n="portrait_desc">
+              Chaque étudiant appose l'empreinte peinte de sa main sur une fresque monumentale. Une mémoire collective partagée qui immortalisera notre promotion.
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Section 3: Flagship Competitions Track (Slides 6, 7, 8) -->
+      <section id="competitions" class="programme-track-section" data-category="competitions">
+        
+        <div class="section-head">
+          <span class="section-tag" data-i18n="comp_tag">HACKATHONS D'ÉLITE & ARÈNES</span>
+          <h2 class="section-heading" data-i18n-html="comp_heading">COMPÉTITIONS <span>PHARES</span></h2>
+          <p class="section-sub" data-i18n="comp_sub">
+            Placer la barre plus haut avec des hackathons intenses, des alliances nationales et du vrai code de production.
+          </p>
+        </div>
+
+        <!-- Event 1: Club Fight Day (Slide 6) -->
+        <div class="comp-feature-card club-fight-card">
+          <div class="comp-card-badge-row">
+            <span class="comp-category-chip" data-i18n="clubfight_tag">COMPETITION</span>
+            <span class="comp-status-classified" data-i18n="clubfight_status">STRICTEMENT CLASSIFIÉ</span>
+          </div>
+          <h3 class="comp-card-title" data-i18n="clubfight_title">Club Fight Day</h3>
+          <p class="comp-card-desc" data-i18n="clubfight_desc">
+            Affrontement direct entre les clubs du campus. Les épreuves exactes restent strictement classifiées pour le moment.
+          </p>
+        </div>
+
+        <!-- Event 2: National Game Jam - 1337 x YouCode (Slide 7) -->
+        <div class="comp-feature-card game-jam-card">
+          <div class="comp-card-badge-row">
+            <span class="comp-category-chip" data-i18n="gamejam_tag">COMPETITION // L'ALLIANCE</span>
+          </div>
+          <h3 class="comp-card-title" data-i18n="gamejam_title">National Game Jam</h3>
+          
+          <div class="gamejam-alliance-box">
+            <div class="alliance-name" data-i18n="gamejam_alliance">1337 × YouCode</div>
+            <div class="alliance-desc" data-i18n="gamejam_alliance_desc">Participation nationale conjointe unissant les meilleurs talents du code au Maroc.</div>
+          </div>
+
+          <div class="gamejam-specs-grid">
+            <div class="spec-cell">
+              <span class="spec-lbl" data-i18n="gamejam_qualifier_lbl">Épreuve</span>
+              <span class="spec-val" data-i18n="gamejam_qualifier_val">Hackathon Game Dev</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-lbl" data-i18n="gamejam_loc_lbl">Lieu</span>
+              <span class="spec-val" data-i18n="gamejam_loc_val">Campus Benguerir</span>
+            </div>
+            <div class="spec-cell highlight-cell">
+              <span class="spec-lbl" data-i18n="gamejam_out_lbl">Livrable</span>
+              <span class="spec-val" data-i18n="gamejam_out_val">Jeu 100% Jouable</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 3: Web Hackathon: Smart Agriculture - Triple Alliance (Slide 8) -->
+        <div class="comp-feature-card smart-agri-card">
+          <div class="comp-card-badge-row">
+            <span class="comp-category-chip sustainability-chip" data-i18n="hackathon_tag">FOCUS DURABILITÉ</span>
+          </div>
+          <h3 class="comp-card-title" data-i18n="hackathon_title">Web Hackathon: Smart Agriculture</h3>
+
+          <div class="hackathon-stats-banner">
+            <div class="hack-stat-col">
+              <span class="hack-big-num" data-i18n="hackathon_sprint_num">72</span>
+              <span class="hack-stat-text" data-i18n="hackathon_sprint_lbl">HEURES DE SPRINT</span>
+            </div>
+            <div class="hack-stat-separator"></div>
+            <div class="hack-stat-col">
+              <span class="hack-big-num" data-i18n="hackathon_mvp_num">1</span>
+              <span class="hack-stat-text" data-i18n="hackathon_mvp_lbl">MVP OPÉRATIONNEL</span>
+            </div>
+          </div>
+
+          <div class="triple-alliance-grid">
+            <div class="alliance-role-card">
+              <h4 class="alliance-partner-name" data-i18n="hack_esafe_title">ESAFE</h4>
+              <p class="alliance-partner-desc" data-i18n="hack_esafe_desc">Validation agronomique &amp; recherche scientifique.</p>
+            </div>
+            <div class="alliance-role-card">
+              <h4 class="alliance-partner-name" data-i18n="hack_1337_title">1337</h4>
+              <p class="alliance-partner-desc" data-i18n="hack_1337_desc">Ingénierie algorithmique &amp; logique système.</p>
+            </div>
+            <div class="alliance-role-card alliance-youcode-highlight">
+              <h4 class="alliance-partner-name" data-i18n="hack_youcode_title">YouCode</h4>
+              <p class="alliance-partner-desc" data-i18n="hack_youcode_desc">Prototypage produit, développement web &amp; UI/UX.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Section 4: Industry Network Track (Slide 10) -->
+      <section id="industry" class="programme-track-section" data-category="industry">
+        
+        <div class="section-head">
+          <span class="section-tag" data-i18n="ind_tag">RÉSEAU ENTREPRISES</span>
+          <h2 class="section-heading" data-i18n-html="ind_heading">STARTUP & COMPANY <span>CONNECT</span></h2>
+          <p class="section-sub" data-i18n="ind_sub">
+            Un parcours en 3 phases reliant directement les compétences des étudiants aux fondateurs et recruteurs tech.
+          </p>
+        </div>
+
+        <div class="pipeline-phases-container">
+          
+          <!-- Phase 1 -->
+          <div class="pipeline-step-card">
+            <div class="pipeline-step-top">
+              <span class="pipeline-phase-badge" data-i18n="phase_first">1ère Phase</span>
+              <div class="pipeline-step-dot">01</div>
+            </div>
+            <h3 class="pipeline-step-title" data-i18n="phase_pitch_title">Le Pitch</h3>
+            <p class="pipeline-step-desc" data-i18n="phase_pitch_desc">
+              Les fondateurs présentent leur architecture et confient un vrai défi opérationnel aux étudiants.
+            </p>
+          </div>
+
+          <div class="pipeline-connector-arrow" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="pipeline-step-card">
+            <div class="pipeline-step-top">
+              <span class="pipeline-phase-badge" data-i18n="phase_second">2ème Phase</span>
+              <div class="pipeline-step-dot">02</div>
+            </div>
+            <h3 class="pipeline-step-title" data-i18n="phase_build_title">Le Build</h3>
+            <p class="pipeline-step-desc" data-i18n="phase_build_desc">
+              YouPulse encadre et met à disposition les ressources pour développer des solutions robustes.
+            </p>
+          </div>
+
+          <div class="pipeline-connector-arrow" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="pipeline-step-card highlight-step">
+            <div class="pipeline-step-top">
+              <span class="pipeline-phase-badge" data-i18n="phase_third">3ème Phase</span>
+              <div class="pipeline-step-dot">03</div>
+            </div>
+            <h3 class="pipeline-step-title" data-i18n="phase_handover_title">La Restitution</h3>
+            <p class="pipeline-step-desc" data-i18n="phase_handover_desc">
+              Pitch final devant les directions d'entreprise pour décrocher stages rémunérés et projets de fin d'études (PFE).
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Section 5: Culture & Well-being Track (Slide 11) -->
+      <section id="culture" class="programme-track-section" data-category="culture">
+        
+        <div class="section-head">
+          <span class="section-tag" data-i18n="cult_tag">CULTURE & COMMUNAUTÉ</span>
+          <h2 class="section-heading" data-i18n-html="cult_heading">BIEN-ÊTRE & <span>EXPÉRIENCES</span></h2>
+          <p class="section-sub" data-i18n="cult_sub">
+            Décompresser, honorer nos traditions marocaines et cultiver un esprit de famille soudé et chaleureux.
+          </p>
+        </div>
+
+        <div class="experiences-grid">
+          
+          <div class="exp-card exp-card-moroccan">
+            <div class="exp-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <h3 class="exp-card-title" data-i18n="exp1_title">Nuit Traditionnelle Marocaine</h3>
+            <p class="exp-card-desc" data-i18n="exp1_desc">
+              Soirée festive inspirée des mariages marocains avec thé à la menthe, dîner gastronomique et musique chaâbi.
+            </p>
+          </div>
+
+          <div class="exp-card exp-card-women">
+            <div class="exp-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"></circle><line x1="12" y1="15" x2="12" y2="22"></line><line x1="8" y1="18" x2="16" y2="18"></line></svg>
+            </div>
+            <h3 class="exp-card-title" data-i18n="exp2_title">8 Mars — Journée des Droits des Femmes</h3>
+            <p class="exp-card-desc" data-i18n="exp2_desc">
+              Célébration dédiée à valoriser et inspirer les développeuses et leaders de YouCode.
+            </p>
+          </div>
+
+          <div class="exp-card exp-card-pijama">
+            <div class="exp-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </div>
+            <h3 class="exp-card-title" data-i18n="exp3_title">Soirée Pyjama (100% Féminine)</h3>
+            <p class="exp-card-desc" data-i18n="exp3_desc">
+              Soirée cocooning et détente pour discuter, jouer à des jeux de société et se relaxer entre filles.
+            </p>
+          </div>
+
+          <div class="exp-card exp-card-unprofessional">
+            <div class="exp-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+            </div>
+            <h3 class="exp-card-title" data-i18n="exp4_title">Journée Décalée (Unprofessional Day)</h3>
+            <p class="exp-card-desc" data-i18n="exp4_desc">
+              Anti-stress corporate déjanté où étudiants et encadrants viennent vêtus des tenues les plus drôles et improbables.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Section 6: Grand Finale Manifesto (Slide 13) -->
+      <section class="manifesto-banner-wrap">
+        <div class="manifesto-card">
+          <div class="manifesto-glow" aria-hidden="true"></div>
+          <div class="manifesto-inner">
+            <h2 class="manifesto-title" data-i18n-html="mani_title">
+              LA PARTICIPATION ÉTUDIANTE. <br />
+              <span class="gradient-blue">AU CŒUR DE TOUT.</span>
+            </h2>
+            <p class="manifesto-desc" data-i18n="mani_desc">
+              Bâtir un écosystème partagé d'intégration, de compétition et d'essor professionnel. Le pouls de YouCode : Connecter. Concourir. S'épanouir.
+            </p>
+            <div class="manifesto-actions">
+              <a href="index.html" class="btn-laser-primary">
+                <span class="btn-laser-glow" aria-hidden="true"></span>
+                <span class="btn-laser-content">
+                  <span data-i18n="mani_cta_home">EXPLORER LE SITE PRINCIPAL</span>
+                </span>
+              </a>
+              <a href="index.html#clubs" class="btn-frosted-secondary">
+                <span data-i18n="mani_cta_bde">LANCER UN CLUB</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-top-row">
+          <img src="assets/images/logo_dark.png" alt="YouPulse BDE YouCode" class="footer-logo" />
+          <div class="footer-motto-tag">CONNECT. COMPETE. COME ALIVE.</div>
+        </div>
+        <div class="footer-bottom-row">
+          <p class="footer-credits" data-i18n="footer_credits">
+            © 2026 YouPulse • Le BDE de YouCode • Plan d'Événements & Activités Officiel.
+          </p>
+          <span data-i18n="footer_sync" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--blue-glow);">
+            ALL SYSTEMS SYNCHRONIZED // YOUCODE YOUSSOUFIA
+          </span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="programme.js"></script>
+</body>
+</html>
