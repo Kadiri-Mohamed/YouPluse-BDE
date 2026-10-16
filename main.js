@@ -376,7 +376,7 @@ const TRANSLATIONS = {
     hero_headline: `EVENTS & ACTIVITIES <br /><span class="gradient-blue">PLAN 2026 - 2027</span>`,
     hero_subtext: "Annual programme for students and professional partners. The Pulse of YouCode: uniting peer-learning, national hackathons, esports arenas, and student wellbeing.",
     btn_discover_program: "DISCOVER THE PROGRAMME",
-    btn_status_day: "TOMORROW 14:00",
+    btn_status_day: "POSTPONED // DISCORD",
     btn_four_pillars: "FOUR ENGAGEMENT PILLARS",
     hud_synth_active: "AUDIO-SYNTH ACTIVE //",
     hud_synth_desc: "Move mouse or click to modulate soundwaves",
@@ -443,9 +443,10 @@ const TRANSLATIONS = {
     welcome_btn_view: "VIEW THE PROGRAMME",
     welcome_btn_skip: "Later, explore the website",
     welcome_footer: "CONFIDENTIAL ACCESS · YOUCODE YOUSSOUFIA",
-    hamster_embargo: "OFFICIAL RELEASE TOMORROW AT 14:00",
-    modal_btn_see_programme: "VIEW THE PROGRAMME PAGE",
-    modal_btn_locked_programme: "LOCKED // RELEASE AT 14:00",
+    hamster_embargo: "LAUNCH POSTPONED // ANNOUNCEMENT ON DISCORD",
+    modal_discord_notice: "The official time will be announced on our Discord server",
+    modal_btn_see_programme: "POSTPONED // ANNOUNCEMENT ON DISCORD",
+    modal_btn_locked_programme: "POSTPONED // ANNOUNCEMENT ON DISCORD",
     count_days: "Days",
     count_hours: "Hours",
     count_mins: "Minutes",
@@ -466,7 +467,7 @@ const TRANSLATIONS = {
     hero_headline: `PLAN D'ÉVÉNEMENTS &amp; ACTIVITÉS <br /><span class="gradient-blue">2026 - 2027</span>`,
     hero_subtext: "Programme annuel pour étudiants et partenaires professionnels. Le pouls de YouCode : unifier peer-learning, hackathons nationaux, arènes esports et bien-être étudiant.",
     btn_discover_program: "DÉCOUVRIR LE PROGRAMME",
-    btn_status_day: "DEMAIN 14:00 (GHDA)",
+    btn_status_day: "REPORTÉ // DISCORD",
     btn_four_pillars: "LES 4 PILIERS D'ENGAGEMENT",
     hud_synth_active: "AUDIO-SYNTH ACTIF //",
     hud_synth_desc: "Bougez la souris ou cliquez pour moduler les ondes",
@@ -533,9 +534,10 @@ const TRANSLATIONS = {
     welcome_btn_view: "VOIR LE PROGRAMME",
     welcome_btn_skip: "Plus tard, explorer le site",
     welcome_footer: "ACCÈS CONFIDENTIEL · YOUCODE YOUSSOUFIA",
-    hamster_embargo: "OUVERTURE OFFICIELLE DEMAIN À 14:00",
-    modal_btn_see_programme: "VOIR LA PAGE DU PROGRAMME",
-    modal_btn_locked_programme: "VERROUILLÉ // SORTIE À 14:00",
+    hamster_embargo: "LANCEMENT REPORTÉ // ANNONCE SUR LE DISCORD",
+    modal_discord_notice: "L'heure officielle sera annoncée sur notre serveur Discord",
+    modal_btn_see_programme: "REPORTÉ // ANNONCE SUR DISCORD",
+    modal_btn_locked_programme: "REPORTÉ // ANNONCE SUR DISCORD",
     count_days: "Jours",
     count_hours: "Heures",
     count_mins: "Minutes",
@@ -889,10 +891,6 @@ function getProgrammeTargetDate() {
 let __hasCelebratedUnlock = false;
 
 function updateCountdown() {
-  const target = getProgrammeTargetDate();
-  const now = new Date();
-  const diff = target - now;
-
   const daysEl = document.getElementById('count-days');
   const hoursEl = document.getElementById('count-hours');
   const minsEl = document.getElementById('count-mins');
@@ -902,48 +900,23 @@ function updateCountdown() {
   const btnUnlockedProg = document.getElementById('btn-unlocked-programme');
   const navProgLink = document.querySelector('.nav-link-programme');
 
-  if (diff <= 0) {
-    if (daysEl) daysEl.textContent = '00';
-    if (hoursEl) hoursEl.textContent = '00';
-    if (minsEl) minsEl.textContent = '00';
-    if (secsEl) secsEl.textContent = '00';
+  // Freeze countdown digits on standby
+  if (daysEl) daysEl.textContent = '--';
+  if (hoursEl) hoursEl.textContent = '--';
+  if (minsEl) minsEl.textContent = '--';
+  if (secsEl) secsEl.textContent = '--';
 
-    if (embargoEl) {
-      embargoEl.textContent = currentLang === 'fr' 
-        ? 'LE PROGRAMME EST MAINTENANT DISPONIBLE !' 
-        : 'THE PROGRAMME IS NOW AVAILABLE!';
-      embargoEl.classList.add('embargo-unlocked');
-    }
-    statusPills.forEach(p => {
-      p.textContent = currentLang === 'fr' ? 'DISPONIBLE' : 'NOW LIVE';
-      p.classList.add('pill-unlocked');
-    });
-
-    if (btnUnlockedProg) {
-      btnUnlockedProg.classList.remove('is-locked-cta');
-      btnUnlockedProg.classList.add('is-unlocked-cta');
-      const textSpan = btnUnlockedProg.querySelector('[data-i18n="modal_btn_see_programme"]') || btnUnlockedProg.querySelector('span:not(.btn-laser-glow):not(.btn-laser-content)');
-      if (textSpan) {
-        textSpan.textContent = currentLang === 'fr' ? 'VOIR LA PAGE DU PROGRAMME' : 'VIEW THE PROGRAMME PAGE';
-      }
-    }
-
-    if (navProgLink) {
-      navProgLink.classList.remove('is-nav-locked');
-      navProgLink.classList.add('is-nav-unlocked');
-      navProgLink.setAttribute('title', currentLang === 'fr' ? 'Programme Déverrouillé' : 'Programme Unlocked');
-    }
-
-    if (!__hasCelebratedUnlock && window.__wasLockedState) {
-      __hasCelebratedUnlock = true;
-      sound.playUnlockFanfare();
-    }
-    window.__wasLockedState = false;
-    return;
+  if (embargoEl) {
+    embargoEl.textContent = currentLang === 'fr' 
+      ? 'LANCEMENT REPORTÉ // ANNONCE SUR LE DISCORD' 
+      : 'LAUNCH POSTPONED // ANNOUNCEMENT ON DISCORD';
+    embargoEl.classList.remove('embargo-unlocked');
   }
 
-  // diff > 0: Still locked
-  window.__wasLockedState = true;
+  statusPills.forEach(p => {
+    p.textContent = currentLang === 'fr' ? 'REPORTÉ // DISCORD' : 'POSTPONED // DISCORD';
+    p.classList.remove('pill-unlocked');
+  });
 
   if (btnUnlockedProg) {
     btnUnlockedProg.classList.add('is-locked-cta');
@@ -951,26 +924,18 @@ function updateCountdown() {
     const textSpan = btnUnlockedProg.querySelector('[data-i18n="modal_btn_see_programme"]') || btnUnlockedProg.querySelector('span:not(.btn-laser-glow):not(.btn-laser-content)');
     if (textSpan) {
       textSpan.textContent = currentLang === 'fr' 
-        ? 'VERROUILLÉ // SORTIE À 14:00' 
-        : 'LOCKED // RELEASE AT 14:00';
+        ? 'REPORTÉ // ANNONCE SUR DISCORD' 
+        : 'POSTPONED // ANNOUNCEMENT ON DISCORD';
     }
   }
 
   if (navProgLink) {
     navProgLink.classList.add('is-nav-locked');
     navProgLink.classList.remove('is-nav-unlocked');
-    navProgLink.setAttribute('title', currentLang === 'fr' ? 'Programme Verrouillé jusqu\'à 14:00' : 'Programme Locked until 14:00');
+    navProgLink.setAttribute('title', currentLang === 'fr' 
+      ? 'Programme Reporté // Annonce sur Discord' 
+      : 'Programme Postponed // Announcement on Discord');
   }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-  if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
-  if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-  if (minsEl) minsEl.textContent = String(minutes).padStart(2, '0');
-  if (secsEl) secsEl.textContent = String(seconds).padStart(2, '0');
 }
 
 // --- 7. Modal Handlers (Welcome Teaser & Bouncing Hamster) ---
@@ -1086,10 +1051,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Nav link "Programme" click guard
   if (navProgLink) {
     navProgLink.addEventListener('click', (e) => {
-      const target = getProgrammeTargetDate();
-      if (target - new Date() > 0) {
-        e.preventDefault();
-        openHamsterModal();
+      e.preventDefault();
+      openHamsterModal();
+      if (waveEngine && typeof waveEngine.emitSonar === 'function') {
         waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight * 0.3, 45);
       }
     });
@@ -1098,28 +1062,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // Modal Programme CTA button click guard
   if (btnUnlockedProg) {
     btnUnlockedProg.addEventListener('click', (e) => {
-      const target = getProgrammeTargetDate();
-      if (target - new Date() > 0) {
-        e.preventDefault();
-        sound.playHamsterSqueak();
+      e.preventDefault();
+      sound.playHamsterSqueak();
+      if (waveEngine && typeof waveEngine.emitSonar === 'function') {
         waveEngine.emitSonar(e.clientX, e.clientY, 40);
-        const countdownGrid = document.querySelector('.countdown-digits-grid');
-        if (countdownGrid) {
-          countdownGrid.classList.remove('lock-shake');
-          void countdownGrid.offsetWidth;
-          countdownGrid.classList.add('lock-shake');
-        }
+      }
+      const countdownGrid = document.querySelector('.countdown-digits-grid');
+      if (countdownGrid) {
+        countdownGrid.classList.remove('lock-shake');
+        void countdownGrid.offsetWidth;
+        countdownGrid.classList.add('lock-shake');
       }
     });
   }
 
   if (btnSecretHero) {
     btnSecretHero.addEventListener('click', () => {
-      const target = getProgrammeTargetDate();
-      if (target - new Date() <= 0) {
-        window.location.href = 'programme.html';
-      } else {
-        openHamsterModal();
+      openHamsterModal();
+      if (waveEngine && typeof waveEngine.emitSonar === 'function') {
         waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight / 2, 45);
       }
     });
@@ -1127,11 +1087,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (btnSecretHeader) {
     btnSecretHeader.addEventListener('click', () => {
-      const target = getProgrammeTargetDate();
-      if (target - new Date() <= 0) {
-        window.location.href = 'programme.html';
-      } else {
-        openHamsterModal();
+      openHamsterModal();
+      if (waveEngine && typeof waveEngine.emitSonar === 'function') {
         waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight * 0.3, 45);
       }
     });

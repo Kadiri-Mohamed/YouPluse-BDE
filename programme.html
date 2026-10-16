@@ -29,23 +29,8 @@
       try {
         var params = new URLSearchParams(window.location.search);
         if (params.has('unlock')) return;
-        var targetTime;
-        if (params.has('test_sec')) {
-          var sec = parseInt(params.get('test_sec'), 10) || 10;
-          var key = 'youpulse_test_target_sec_' + sec;
-          if (!sessionStorage.getItem(key)) {
-            sessionStorage.setItem(key, String(Date.now() + sec * 1000));
-          }
-          targetTime = parseInt(sessionStorage.getItem(key), 10);
-        } else if (params.has('locked')) {
-          targetTime = Date.now() + 3600000;
-        } else {
-          // Official Launch Target: Friday 16 October 2026 at 14:00:00 (Ghda m3a 14:00)
-          targetTime = new Date(2026, 9, 16, 16, 0, 0).getTime();
-        }
-        if (targetTime - Date.now() > 0) {
-          document.documentElement.classList.add('programme-locked-mode');
-        }
+        // Launch is postponed: Keep locked immediately until announced on Discord
+        document.documentElement.classList.add('programme-locked-mode');
       } catch (e) {}
     })();
   </script>
@@ -142,17 +127,17 @@
         <!-- Restricted Status Pill -->
         <div class="lock-status-badge">
           <span class="status-live-dot lock-red-pulse"></span>
-          <span data-i18n="lock_badge_status">ACCÈS VERROUILLÉ // EMBARGO EN COURS</span>
+          <span data-i18n="lock_badge_status">LANCEMENT REPORTÉ // ANNONCE SUR DISCORD</span>
         </div>
 
         <!-- Lock Heading & Subtitle -->
         <h1 class="lock-headline" data-i18n-html="lock_headline">
-          LE PROGRAMME EST ACTUELLEMENT <br />
-          <span class="gradient-blue">VERROUILLÉ</span>
+          LE LANCEMENT DU PROGRAMME <br />
+          <span class="gradient-blue">EST REPORTÉ</span>
         </h1>
 
         <p class="lock-subtext" data-i18n="lock_subtext">
-          La feuille de route officielle YouPulse 2026 - 2027 est sous embargo. Elle se déverrouillera automatiquement dès la fin du compte à rebours :
+          L'ouverture officielle a été temporairement suspendue. La nouvelle heure officielle sera annoncée en direct sur notre serveur Discord.
         </p>
 
         <!-- Bouncing Hamster Avatar ("Shhh!") -->
@@ -164,26 +149,58 @@
               <img src="assets/images/hamster_shhh.jpg" alt="Hamster Secret YouPulse" />
             </div>
           </div>
-          <div class="lock-hamster-tag" data-i18n="lock_hamster_tag">CONFIDENTIAL // GHDA M3A 14:00</div>
+          <div class="lock-hamster-tag" data-i18n="lock_hamster_tag">REPORTÉ // ANNONCE SUR DISCORD</div>
         </div>
 
-        <!-- Giant Cyber Countdown Grid -->
+        <!-- Giant Cyber Countdown Wrapper: Discord Announcement & Standby Display -->
         <div class="lock-countdown-wrapper">
-          <div class="countdown-digits-grid lock-digits-grid">
+          
+          <!-- Cyber Discord Announcement Banner -->
+          <div class="lock-discord-card">
+            <div class="discord-card-halo" aria-hidden="true"></div>
+            <div class="discord-card-content">
+              <div class="discord-card-header">
+                <div class="discord-icon-badge">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                  </svg>
+                </div>
+                <div class="discord-card-meta">
+                  <span class="discord-badge-live"></span>
+                  <span class="discord-card-tag" data-i18n="lock_discord_tag">CANAL OFFICIEL // DISCORD</span>
+                </div>
+              </div>
+              <h2 class="discord-card-title" data-i18n="lock_discord_title">
+                L'HEURE OFFICIELLE SERA ANNONCÉE SUR NOTRE SERVEUR DISCORD
+              </h2>
+              <p class="discord-card-sub" data-i18n="lock_discord_sub">
+                Le compte à rebours est suspendu. Rendez-vous sur le serveur Discord pour suivre l'annonce en direct.
+              </p>
+            </div>
+          </div>
+
+          <!-- Standby Status Pill -->
+          <div class="lock-standby-pill">
+            <span class="status-live-dot lock-amber-pulse"></span>
+            <span data-i18n="lock_standby_label">COMPTE À REBOURS SUSPENDU // EN ATTENTE D'ANNONCE</span>
+          </div>
+
+          <!-- Frozen Digits Grid -->
+          <div class="countdown-digits-grid lock-digits-grid is-standby-grid">
             <div class="digit-box">
-              <span class="digit-num" id="lock-count-days">00</span>
+              <span class="digit-num" id="lock-count-days">--</span>
               <span class="digit-lbl" data-i18n="count_days">Jours</span>
             </div>
             <div class="digit-box">
-              <span class="digit-num" id="lock-count-hours">00</span>
+              <span class="digit-num" id="lock-count-hours">--</span>
               <span class="digit-lbl" data-i18n="count_hours">Heures</span>
             </div>
             <div class="digit-box">
-              <span class="digit-num" id="lock-count-mins">00</span>
+              <span class="digit-num" id="lock-count-mins">--</span>
               <span class="digit-lbl" data-i18n="count_mins">Minutes</span>
             </div>
             <div class="digit-box">
-              <span class="digit-num" id="lock-count-secs">00</span>
+              <span class="digit-num" id="lock-count-secs">--</span>
               <span class="digit-lbl" data-i18n="count_secs">Secondes</span>
             </div>
           </div>
@@ -201,7 +218,7 @@
         </div>
 
         <div class="lock-system-tag" data-i18n="lock_system_tag">
-          SYNCHRONISATION BDE YOUPULSE • DÉVERROUILLAGE EN DIRECT SANS RECHARGEMENT
+          STATUT : REPORTÉ • L'HEURE OFFICIELLE SERA ANNONCÉE SUR NOTRE SERVEUR DISCORD
         </div>
 
       </div>

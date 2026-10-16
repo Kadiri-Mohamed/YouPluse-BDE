@@ -460,13 +460,17 @@ const TRANSLATIONS = {
     footer_credits: "© 2026 YouPulse • The BDE of YouCode • Official Events & Activities Plan.",
     footer_sync: "ALL SYSTEMS SYNCHRONIZED // YOUCODE YOUSSOUFIA",
 
-    // Lock screen translations
-    lock_badge_status: "RESTRICTED ACCESS // OFFICIAL EMBARGO",
-    lock_headline: `THE PROGRAMME IS CURRENTLY <br /><span class="gradient-blue">LOCKED</span>`,
-    lock_subtext: "The official YouPulse 2026 - 2027 roadmap is under embargo. It will unlock automatically when the countdown ends:",
-    lock_hamster_tag: "CONFIDENTIAL // RELEASE TOMORROW AT 14:00",
+    // Lock screen translations (Postponed / Discord Announcement)
+    lock_badge_status: "LAUNCH POSTPONED // ANNOUNCEMENT ON DISCORD",
+    lock_headline: `THE PROGRAMME LAUNCH <br /><span class="gradient-blue">HAS BEEN POSTPONED</span>`,
+    lock_subtext: "The official release has been temporarily suspended. The official time will be announced live on our Discord server.",
+    lock_hamster_tag: "POSTPONED // ANNOUNCEMENT ON DISCORD",
+    lock_discord_tag: "OFFICIAL CHANNEL // DISCORD",
+    lock_discord_title: "THE OFFICIAL TIME WILL BE ANNOUNCED ON OUR DISCORD SERVER",
+    lock_discord_sub: "The countdown is suspended. Head over to our Discord server to follow the live announcement.",
+    lock_standby_label: "COUNTDOWN SUSPENDED // AWAITING ANNOUNCEMENT",
     lock_btn_home: "Back to Home Page",
-    lock_system_tag: "BDE YOUPULSE SYNCHRONIZATION • AUTOMATIC LIVE UNLOCK WITHOUT REFRESH",
+    lock_system_tag: "STATUS: POSTPONED • OFFICIAL TIME WILL BE ANNOUNCED ON OUR DISCORD SERVER",
     count_days: "Days",
     count_hours: "Hours",
     count_mins: "Minutes",
@@ -624,13 +628,17 @@ const TRANSLATIONS = {
     footer_credits: "© 2026 YouPulse • Le BDE de YouCode • Plan d'Événements & Activités Officiel.",
     footer_sync: "TOUS LES SYSTÈMES SYNCHRONISÉS // YOUCODE YOUSSOUFIA",
 
-    // Lock screen translations
-    lock_badge_status: "ACCÈS VERROUILLÉ // EMBARGO EN COURS",
-    lock_headline: `LE PROGRAMME EST ACTUELLEMENT <br /><span class="gradient-blue">VERROUILLÉ</span>`,
-    lock_subtext: "La feuille de route officielle YouPulse 2026 - 2027 est sous embargo. Elle se déverrouillera automatiquement dès la fin du compte à rebours :",
-    lock_hamster_tag: "CONFIDENTIEL // GHDA M3A 14:00",
+    // Lock screen translations (Postponed / Discord Announcement)
+    lock_badge_status: "LANCEMENT REPORTÉ // ANNONCE SUR DISCORD",
+    lock_headline: `LE LANCEMENT DU PROGRAMME <br /><span class="gradient-blue">EST REPORTÉ</span>`,
+    lock_subtext: "L'ouverture officielle a été temporairement suspendue. La nouvelle heure officielle sera annoncée en direct sur notre serveur Discord.",
+    lock_hamster_tag: "REPORTÉ // ANNONCE SUR DISCORD",
+    lock_discord_tag: "CANAL OFFICIEL // DISCORD",
+    lock_discord_title: "L'HEURE OFFICIELLE SERA ANNONCÉE SUR NOTRE SERVEUR DISCORD",
+    lock_discord_sub: "Le compte à rebours est suspendu. Rendez-vous sur le serveur Discord pour suivre l'annonce en direct.",
+    lock_standby_label: "COMPTE À REBOURS SUSPENDU // EN ATTENTE D'ANNONCE",
     lock_btn_home: "Retourner à l'Accueil",
-    lock_system_tag: "SYNCHRONISATION BDE YOUPULSE • DÉVERROUILLAGE EN DIRECT SANS RECHARGEMENT",
+    lock_system_tag: "STATUT : REPORTÉ • L'HEURE OFFICIELLE SERA ANNONCÉE SUR NOTRE SERVEUR DISCORD",
     count_days: "Jours",
     count_hours: "Heures",
     count_mins: "Minutes",
@@ -808,59 +816,34 @@ function initProgrammeLockEngine(waveEngine) {
 
   if (!lockScreen) return;
 
-  let hasUnlocked = false;
-
   if (hamsterPic) {
     hamsterPic.addEventListener('click', (e) => {
       sound.playHamsterSqueak();
-      if (waveEngine) waveEngine.emitSonar(e.clientX, e.clientY, 55);
+      if (waveEngine && typeof waveEngine.emitSonar === 'function') {
+        waveEngine.emitSonar(e.clientX, e.clientY, 55);
+      }
     });
   }
 
-  function updateLockCountdown() {
-    const target = getProgrammeTargetDate();
-    const now = new Date();
-    const diff = target - now;
-
-    if (diff <= 0) {
-      if (daysEl) daysEl.textContent = '00';
-      if (hoursEl) hoursEl.textContent = '00';
-      if (minsEl) minsEl.textContent = '00';
-      if (secsEl) secsEl.textContent = '00';
-
-      document.documentElement.classList.remove('programme-locked-mode');
-      lockScreen.style.display = 'none';
-
-      if (!hasUnlocked && window.__wasLockedByCountdown) {
-        hasUnlocked = true;
-        sound.playUnlockFanfare();
-        if (waveEngine) waveEngine.emitSonar(window.innerWidth / 2, window.innerHeight * 0.35, 95);
-        if (mainContainer) {
-          mainContainer.classList.add('programme-unlocked-reveal');
-        }
-      }
-      return;
+  const urlParams = new URLSearchParams(window.location.search);
+  // Manual test override only
+  if (urlParams.has('unlock')) {
+    document.documentElement.classList.remove('programme-locked-mode');
+    lockScreen.style.display = 'none';
+    if (mainContainer) {
+      mainContainer.classList.add('programme-unlocked-reveal');
     }
-
-    // diff > 0: Page stays locked
-    window.__wasLockedByCountdown = true;
-    hasUnlocked = false;
-    document.documentElement.classList.add('programme-locked-mode');
-    lockScreen.style.display = 'block';
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
-    if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-    if (minsEl) minsEl.textContent = String(minutes).padStart(2, '0');
-    if (secsEl) secsEl.textContent = String(seconds).padStart(2, '0');
+    return;
   }
 
-  updateLockCountdown();
-  setInterval(updateLockCountdown, 1000);
+  // LAUNCH POSTPONED: Keep page strictly locked, countdown frozen on standby
+  document.documentElement.classList.add('programme-locked-mode');
+  lockScreen.style.display = 'block';
+
+  if (daysEl) daysEl.textContent = '--';
+  if (hoursEl) hoursEl.textContent = '--';
+  if (minsEl) minsEl.textContent = '--';
+  if (secsEl) secsEl.textContent = '--';
 }
 
 // --- 7. Programme Floating Left-Spine Navigator (Filter & Scroll Spy) ---

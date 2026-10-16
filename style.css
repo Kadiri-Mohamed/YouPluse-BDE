@@ -3243,6 +3243,161 @@ html.programme-locked-mode .programme-lock-screen {
   margin-top: 0.45rem;
 }
 
+/* ==========================================================================
+   DISCORD EMBARGO & STANDBY NOTIFICATION CARD
+   ========================================================================== */
+.lock-discord-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(88, 101, 242, 0.16), rgba(0, 210, 255, 0.08)), #0a0e1a;
+  border: 1.5px solid rgba(88, 101, 242, 0.45);
+  border-radius: 20px;
+  padding: 1.4rem 1.65rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65), 0 0 25px rgba(88, 101, 242, 0.22);
+  overflow: hidden;
+}
+
+.discord-card-halo {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(88, 101, 242, 0.35) 0%, transparent 70%);
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+.discord-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.discord-icon-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(88, 101, 242, 0.22);
+  border: 1px solid rgba(88, 101, 242, 0.6);
+  color: #7289da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
+}
+
+.discord-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.discord-badge-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5865f2;
+  box-shadow: 0 0 8px #5865f2;
+  animation: beaconPulse 2s infinite ease-in-out;
+}
+
+.discord-card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #a5b4fc;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.discord-card-title {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.35;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
+}
+
+.discord-card-sub {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Standby Status Pill */
+.lock-standby-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 1.05rem;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+}
+
+.lock-amber-pulse {
+  background: #f59e0b !important;
+  box-shadow: 0 0 10px #f59e0b !important;
+}
+
+/* Standby Grid styling for -- : -- : -- : -- */
+.is-standby-grid .digit-box {
+  opacity: 0.85;
+  border-color: rgba(245, 158, 11, 0.28) !important;
+}
+
+.is-standby-grid .digit-num {
+  color: #fbbf24 !important;
+  text-shadow: 0 0 16px rgba(245, 158, 11, 0.45) !important;
+  letter-spacing: 0.05em;
+}
+
+.is-standby-grid .digit-lbl {
+  color: #94a3b8 !important;
+}
+
+/* Modal Discord Callout for index.html */
+.modal-discord-callout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  background: rgba(88, 101, 242, 0.12);
+  border: 1px solid rgba(88, 101, 242, 0.4);
+  border-radius: 12px;
+  padding: 0.65rem 1rem;
+  margin: 0.85rem auto 1.25rem;
+  max-width: 440px;
+  color: #e0e7ff;
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 12px rgba(88, 101, 242, 0.18);
+}
+
+.discord-icon-badge-mini {
+  color: #7289da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .lock-actions-row {
   display: flex;
   justify-content: center;
